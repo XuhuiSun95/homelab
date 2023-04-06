@@ -1,0 +1,7 @@
+- name: "{{ role_name }} > create-groups | Ensure all groups exist"
+  ansible.builtin.group:
+    name: "{{ group }}"
+    state: present
+  loop: "{{ default_admin_groups | union (extra_groups) | unique }}"
+  loop_control:
+    loop_var: group

@@ -1,0 +1,8 @@
+extra_groups: []
+
+admin_groups:
+  - sysadmin-local
+
+default_groups: []
+
+default_admin_groups: "{{ admin_groups | union (default_groups) | unique }}"
