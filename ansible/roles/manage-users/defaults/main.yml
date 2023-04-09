@@ -1,8 +1,25 @@
 extra_groups: []
 
+extra_admin_users: []
+extra_users: []
+extra_users_details: []
+
+
 admin_groups:
   - sysadmin-local
 
 default_groups: []
-
 default_admin_groups: "{{ admin_groups | union (default_groups) | unique }}"
+
+default_admin_users:
+  - esun-local
+admin_users: "{{ default_admin_users | union (extra_admin_users) | unique }}"
+
+
+admin_users_details:
+  esun-local:
+    comment: Eric Sun <ericsun1995@gmail.com>
+    # shell: /bin/bash
+    # create_home: yes
+    # password: secret
+    ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDA6z9feYMrDUpipR47F2o8elkMQ+/hcAwKqQ6rTwNYrTYm71QFMFL1nqVJGv6bNi80EV14MW3oxRktBU/Rz3XBrMzFLsJzzHgvwgB7ZGWeIV/sUs5XLDM1SGWyJDWdNYZjDxDfmYICCLLQJbj1nVQqsa59RR80suzR6omOBKywRpiuDx75r+/8fm8uCSDVyJt6UlT0b/lPsZHTlOGkGRkDlSz2LXPprMBYYVLPAGth1tza4tTY0NjEENBOdStmV/W9xawxIcdJiuHjoec/1FRT0JjSzcB6apH56vL6qf4hftP/XNWOmym0zQvTpIqOdhSGwrdkqShzwBx/z1Sx8QsswVSyv39TYtihLzjxQNWwY1er+QUaFSEcD9pSoP37bumEo4tmYt49ZRc33lhrLr+EB7kE9dRYYfNtLTwscrV7gh4pSgwY9VqaB4jqCIodS42aRPqIqW8bujFPpqTg9nHA9Aa7YcmdIjmreYUUHVQba0KXqPp7UHyQKSm26yCpHbE= xuhui@xuhui-LinuxWorkstation

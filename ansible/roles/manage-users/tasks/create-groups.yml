@@ -5,3 +5,25 @@
   loop: "{{ default_admin_groups | union (extra_groups) | unique }}"
   loop_control:
     loop_var: group
+  tags:
+    - create-groups
+
+- name: "{{ role_name }} > create-groups | Ensure sudo installed"
+  ansible.builtin.apt:
+    name: sudo
+    state: present
+  tags:
+    - create-groups
+
+- name: "{{ role_name }} > create-groups | Allow admin groups to have passwordless sudo"
+  ansible.builtin.lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "^%{{ group }}"
+    line: "%{{ group }} ALL=(ALL) NOPASSWD: ALL"
+    validate: visudo -cf %s
+  loop: "{{ admin_groups }}"
+  loop_control:
+    loop_var: group
+  tags:
+    - create-groups

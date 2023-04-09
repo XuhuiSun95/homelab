@@ -1,0 +1,23 @@
+- name: "{{ role_name }} > Create User | Create {{ user }}"
+  ansible.builtin.user:
+    name: "{{ user }}"
+    shell: "{{ user_details.shell | default('/bin/bash') }}"
+    comment: "{{ user_details.comment | default('') }}"
+    groups: "{{ user_details.groups | default(none) }}"
+    append: yes
+    password: "{{ user_details.password | default(omit) }}"
+    create_home: "{{ user_details.create_home | default('yes') }}"
+
+- name: "{{ role_name }} > Create User | Add {{ user }} to the default admin groups (if they deserve it)"
+  ansible.builtin.user:
+    name: "{{ user }}"
+    groups: "{{ default_admin_groups }}"
+    append: yes
+  when: user in admin_users
+
+- name: "{{ role_name }} > Create User | Add {{ user }}'s ssh_key"
+  authorized_key:
+      user: "{{ user }}"
+      key: "{{ user_details.ssh_key }}"
+  when: "user_details.ssh_key is defined and user_details.ssh_key"
+

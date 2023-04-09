@@ -1,0 +1,25 @@
+- name: "{{ role_name }} > create-users | Ensure admin users exist"
+  include_tasks: create-user.yml
+  vars:
+    user: "{{ admin_user }}"
+    user_details: "{{ admin_users_details[admin_user] }}"
+  when: admin_users != []
+  loop: "{{ admin_users }}"
+  loop_control:
+    loop_var: admin_user
+  tags:
+    - create-users
+    - admin_users
+
+- name: "{{ role_name }} > create-users | Ensure extra users exist"
+  include_tasks: create-user.yml
+  vars:
+    user: "{{ extra_user }}"
+    user_details: "{{ extra_users_details[extra_user] }}"
+  when: extra_users != []
+  loop: "{{ extra_users }}"
+  loop_control:
+    loop_var: extra_user
+  tags:
+    - create-users
+    - extra_users
