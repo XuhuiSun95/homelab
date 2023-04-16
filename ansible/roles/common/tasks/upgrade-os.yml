@@ -1,0 +1,6 @@
+- name: "{{ role_name }} > upgrade-os | Ensure os up to date"
+  ansible.builtin.apt:
+    update_cache: yes
+    upgrade: 'yes'
+  tags:
+    - upgrade-os

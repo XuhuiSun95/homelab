@@ -1,0 +1,4 @@
+- name: enable iommu
+  import_tasks: enable-iommu.yml
+  tags:
+    - enable-iommu

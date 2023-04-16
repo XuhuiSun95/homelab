@@ -1,0 +1,30 @@
+- name: "{{ role_name }} > config-ssh | Disable root SSH access"
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin no"
+    state: present
+  notify:
+    - restart sshd
+  tags:
+    - config-ssh
+
+- name: "{{ role_name }} > config-ssh | Disable SSH password authentication"
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication no"
+    state: present
+  notify:
+    - restart sshd
+  tags:
+    - config-ssh
+
+- name: "{{ role_name }} > config-ssh | Allow agent forwarding to root"
+  ansible.builtin.lineinfile:
+    dest: /etc/sudoers
+    insertbefore: "^Defaults"
+    line: "Defaults        env_keep+=SSH_AUTH_SOCK"
+    state: present
+  tags:
+    - config-ssh

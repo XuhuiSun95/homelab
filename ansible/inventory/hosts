@@ -1,2 +1,2 @@
-[all]
+[pve]
 pve1.xuhuisun.local ansible_host=192.168.1.27

@@ -1,4 +1,5 @@
-- hosts: all
+- hosts: pve
   roles:
     - role: manage-users
+    - role: pve-node
     - role: common

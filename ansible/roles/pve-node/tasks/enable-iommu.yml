@@ -1,0 +1,25 @@
+- name: "{{ role_name }} > enable-iommu | Ensure iommu is enabled"
+  ansible.builtin.lineinfile:
+    dest: /etc/default/grub
+    regexp: "^GRUB_CMDLINE_LINUX_DEFAULT=\"quiet\""
+    line: "GRUB_CMDLINE_LINUX_DEFAULT=\"quiet intel_iommu=on\""
+    state: present
+  notify:
+    - update grub
+  tags:
+    - enable-iommu
+
+- name: "{{ role_name }} > enable-iommu | Ensure vifo modules are loaded at boot"
+  ansible.builtin.lineinfile:
+    path: /etc/modules
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - vfio
+    - vfio_iommu_type1
+    - vfio_pci
+    - vfio_virqfd
+  notify:
+    - reboot
+  tags:
+    - enable-iommu
