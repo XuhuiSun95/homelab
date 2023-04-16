@@ -1,0 +1,44 @@
+- name: "{{ role_name }} > create-ssh-config | Ensure prerequisits"
+  ansible.builtin.pip:
+    name: "{{ item }}"
+    state: present
+  delegate_to: localhost
+  run_once: True
+  with_items:
+    - stormssh
+  tags:
+    - create-ssh-config
+
+- name: "{{ role_name }} > create-ssh-config | Ensure ssh config exists"
+  ansible.builtin.file:
+    path: "{{ ssh_config_path }}"
+    state: touch
+    modification_time: preserve
+    access_time: preserve
+  delegate_to: localhost
+  run_once: True
+  tags:
+    - create-ssh-config
+
+- name: "{{ role_name }} > create-ssh-config | Ensure ssh config include"
+  ansible.builtin.lineinfile:
+    path: "{{ ssh_config_path }}"
+    insertbefore: BOF
+    line: "Include {{ ssh_config_include_path }}/*"
+    state: present
+  delegate_to: localhost
+  run_once: True
+  tags:
+    - create-ssh-config
+
+- name: "{{ role_name }} > create-ssh-config | Create ssh config"
+  community.general.ssh_config:
+    ssh_config_file: "{{ ssh_config_include_path }}/{{ inventory_hostname }}"
+    host: "{{ inventory_hostname }}"
+    hostname: "{{ ansible_host }}"
+    port: "{{ ansible_port | default(22) }}"
+    remote_user: "{{ ansible_user | default ('esun-local') }}"
+    state: present
+  delegate_to: localhost
+  tags:
+    - create-ssh-config

@@ -1,0 +1,4 @@
+local_user: "{{ lookup('env', 'USER') }}"
+ssh_path: "~{{ local_user }}/.ssh"
+ssh_config_path: "{{ ssh_path }}/config"
+ssh_config_include_path: "{{ ssh_path }}/config.d"

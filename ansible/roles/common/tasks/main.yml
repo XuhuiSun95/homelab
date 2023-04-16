@@ -3,3 +3,9 @@
   when: ansible_facts['os_family']|lower == 'debian'
   tags:
     - upgrade-os
+
+- name: Create ssh config
+  become: false
+  import_tasks: create-ssh-config.yml
+  tags:
+    - create-ssh-config
