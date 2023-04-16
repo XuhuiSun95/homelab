@@ -1,0 +1,5 @@
+- name: OS upgrade for Debian
+  import_tasks: os-upgrade.yml
+  when: ansible_facts['os_family']|lower == 'debian'
+  tags:
+    - os-upgrade
