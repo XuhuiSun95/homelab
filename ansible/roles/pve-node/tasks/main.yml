@@ -2,3 +2,8 @@
   import_tasks: enable-iommu.yml
   tags:
     - enable-iommu
+
+- name: create cloudimg template
+  import_tasks: create-cloudimg-template.yml
+  tags:
+    - create-cloudimg-template
