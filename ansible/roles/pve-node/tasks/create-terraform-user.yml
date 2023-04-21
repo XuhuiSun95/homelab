@@ -1,0 +1,25 @@
+- name: "{{ role_name }} > create-terraform-user | Add terraform role"
+  ansible.builtin.command: "pveum role add TerraformProv -privs \"Datastore.AllocateSpace Datastore.Audit Pool.Allocate Sys.Audit Sys.Console Sys.Modify VM.Allocate VM.Audit VM.Clone VM.Config.CDROM VM.Config.Cloudinit VM.Config.CPU VM.Config.Disk VM.Config.HWType VM.Config.Memory VM.Config.Network VM.Config.Options VM.Migrate VM.Monitor VM.PowerMgmt\""
+  register: pveum_role_status_output
+  failed_when:
+    - pveum_role_status_output.rc != 0
+    - pveum_role_status_output.rc != 255
+  run_once: True
+  tags:
+    - create-terraform-user
+
+- name: "{{ role_name }} > create-terraform-user | Add terraform user"
+  ansible.builtin.command: "pveum user add terraform-prov@pve --password {{ lookup('ansible.builtin.password', 'credential/terraform-prov@pve', chars=['ascii_letters']) }}"
+  register: pveum_user_status_output
+  failed_when:
+    - pveum_user_status_output.rc != 0
+    - pveum_user_status_output.rc != 2
+  run_once: True
+  tags:
+    - create-terraform-user
+
+- name: "{{ role_name }} > create-terraform-user | Add terraform role to user"
+  ansible.builtin.command: "pveum aclmod / -user terraform-prov@pve -role TerraformProv"
+  run_once: True
+  tags:
+    - create-terraform-user
