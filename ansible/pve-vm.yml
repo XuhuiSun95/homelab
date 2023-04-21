@@ -1,0 +1,5 @@
+- hosts: vm
+  roles:
+    - role: manage-users
+    - role: pve-vm
+    - role: common
