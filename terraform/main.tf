@@ -1,4 +1,11 @@
 terraform {
+  cloud {
+    organization = "ericsun1995"
+    workspaces {
+      name = "homelab"
+    }
+  }
+
   required_providers {
     proxmox = {
       source  = "Telmate/proxmox"
@@ -7,8 +14,24 @@ terraform {
   }
 }
 
+variable "proxmox_api_url" {
+  type = string
+}
+
+variable "proxmox_user" {
+  type      = string
+  sensitive = true
+}
+
+variable "proxmox_password" {
+  type      = string
+  sensitive = true
+}
+
 provider "proxmox" {
-  pm_api_url = "https://192.168.1.27:8006/api2/json"
+  pm_api_url  = var.proxmox_api_url
+  pm_user     = var.proxmox_user
+  pm_password = var.proxmox_password
 }
 
 resource "proxmox_vm_qemu" "master-01" {
