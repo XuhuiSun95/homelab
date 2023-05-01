@@ -96,3 +96,45 @@ resource "proxmox_vm_qemu" "master-03" {
   }
   ipconfig0 = "ip=192.168.1.252/24,gw=192.168.1.1"
 }
+
+resource "proxmox_vm_qemu" "worker-01" {
+  target_node = "pve1"
+  vmid        = 103
+  name        = "worker-01.xuhuisun.local"
+  desc        = "k8s worker node 01"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 2048
+  sockets = 1
+  cores   = 1
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  disk {
+    type    = "scsi"
+    storage = "local-lvm"
+    size    = "10G"
+  }
+  ipconfig0 = "ip=192.168.1.253/24,gw=192.168.1.1"
+}
+
+resource "proxmox_vm_qemu" "worker-02" {
+  target_node = "pve1"
+  vmid        = 104
+  name        = "worker-02.xuhuisun.local"
+  desc        = "k8s worker node 02"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 2048
+  sockets = 1
+  cores   = 1
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  disk {
+    type    = "scsi"
+    storage = "local-lvm"
+    size    = "10G"
+  }
+  ipconfig0 = "ip=192.168.1.254/24,gw=192.168.1.1"
+}
