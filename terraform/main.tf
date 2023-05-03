@@ -52,7 +52,7 @@ resource "proxmox_vm_qemu" "master-01" {
     storage = "local-lvm"
     size    = "10G"
   }
-  ipconfig0 = "ip=192.168.1.250/24,gw=192.168.1.1"
+  ipconfig0 = "ip=192.168.50.250/24,gw=192.168.50.1"
 }
 
 resource "proxmox_vm_qemu" "master-02" {
@@ -73,7 +73,7 @@ resource "proxmox_vm_qemu" "master-02" {
     storage = "local-lvm"
     size    = "10G"
   }
-  ipconfig0 = "ip=192.168.1.251/24,gw=192.168.1.1"
+  ipconfig0 = "ip=192.168.50.251/24,gw=192.168.50.1"
 }
 
 resource "proxmox_vm_qemu" "master-03" {
@@ -94,7 +94,7 @@ resource "proxmox_vm_qemu" "master-03" {
     storage = "local-lvm"
     size    = "10G"
   }
-  ipconfig0 = "ip=192.168.1.252/24,gw=192.168.1.1"
+  ipconfig0 = "ip=192.168.50.252/24,gw=192.168.50.1"
 }
 
 resource "proxmox_vm_qemu" "worker-01" {
@@ -115,7 +115,7 @@ resource "proxmox_vm_qemu" "worker-01" {
     storage = "local-lvm"
     size    = "10G"
   }
-  ipconfig0 = "ip=192.168.1.253/24,gw=192.168.1.1"
+  ipconfig0 = "ip=192.168.50.253/24,gw=192.168.50.1"
 }
 
 resource "proxmox_vm_qemu" "worker-02" {
@@ -136,5 +136,5 @@ resource "proxmox_vm_qemu" "worker-02" {
     storage = "local-lvm"
     size    = "10G"
   }
-  ipconfig0 = "ip=192.168.1.254/24,gw=192.168.1.1"
+  ipconfig0 = "ip=192.168.50.254/24,gw=192.168.50.1"
 }

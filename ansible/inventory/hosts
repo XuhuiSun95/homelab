@@ -1,9 +1,9 @@
 [pve]
-pve1.xuhuisun.local ansible_host=192.168.1.27
+pve1.xuhuisun.local ansible_host=192.168.50.240
 
 [vm]
-master-01.xuhuisun.local ansible_host=192.168.1.250
-master-02.xuhuisun.local ansible_host=192.168.1.251
-master-03.xuhuisun.local ansible_host=192.168.1.252
-worker-01.xuhuisun.local ansible_host=192.168.1.253
-worker-02.xuhuisun.local ansible_host=192.168.1.254
+master-01.xuhuisun.local ansible_host=192.168.50.250
+master-02.xuhuisun.local ansible_host=192.168.50.251
+master-03.xuhuisun.local ansible_host=192.168.50.252
+worker-01.xuhuisun.local ansible_host=192.168.50.253
+worker-02.xuhuisun.local ansible_host=192.168.50.254

@@ -20,3 +20,17 @@ ssh key.
 ```bash
 ansible-playbook -i ansible/inventory ansible/pve-node.yml -u esun-local --become
 ```
+```bash
+ansible-playbook -i ansible/inventory ansible/pve-vm.yml -u esun-local --become
+```
+
+#### Setup k8s
+```bash
+docker pull quay.io/kubespray/kubespray:v2.21.0
+docker run --rm -it --mount type=bind,source="$(pwd)"/ansible/inventory/myculster,dst=/inventory \
+  --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa \
+  quay.io/kubespray/kubespray:v2.21.0 bash
+
+pip install jmespath
+ansible-playbook -i /inventory/inventory.ini --private-key /root/.ssh/id_rsa cluster.yml -u esun-local -b
+```
