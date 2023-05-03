@@ -10,6 +10,11 @@ bin_dir: /usr/local/bin
 # access_ip: 1.1.1.1
 
 
+kube_vip_enabled: true
+kube_vip_controlplane_enabled: true
+kube_vip_address: 192.168.50.249
+kube_vip_arp_enabled: true
+
 ## External LB example config
 ## apiserver_loadbalancer_domain_name: "elb.some.domain"
 # loadbalancer_apiserver:
