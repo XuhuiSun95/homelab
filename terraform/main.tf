@@ -50,7 +50,7 @@ resource "proxmox_vm_qemu" "master-01" {
   disk {
     type    = "scsi"
     storage = "local-lvm"
-    size    = "10G"
+    size    = "30G"
   }
   ipconfig0 = "ip=192.168.50.250/24,gw=192.168.50.1"
 }
@@ -71,7 +71,12 @@ resource "proxmox_vm_qemu" "master-02" {
   disk {
     type    = "scsi"
     storage = "local-lvm"
-    size    = "10G"
+    size    = "30G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "slow"
+    size    = "100G"
   }
   ipconfig0 = "ip=192.168.50.251/24,gw=192.168.50.1"
 }
@@ -92,7 +97,12 @@ resource "proxmox_vm_qemu" "master-03" {
   disk {
     type    = "scsi"
     storage = "local-lvm"
-    size    = "10G"
+    size    = "30G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "slow"
+    size    = "100G"
   }
   ipconfig0 = "ip=192.168.50.252/24,gw=192.168.50.1"
 }
@@ -113,7 +123,12 @@ resource "proxmox_vm_qemu" "worker-01" {
   disk {
     type    = "scsi"
     storage = "local-lvm"
-    size    = "10G"
+    size    = "30G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "slow"
+    size    = "100G"
   }
   ipconfig0 = "ip=192.168.50.253/24,gw=192.168.50.1"
 }
@@ -134,7 +149,12 @@ resource "proxmox_vm_qemu" "worker-02" {
   disk {
     type    = "scsi"
     storage = "local-lvm"
-    size    = "10G"
+    size    = "30G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "slow"
+    size    = "100G"
   }
   ipconfig0 = "ip=192.168.50.254/24,gw=192.168.50.1"
 }

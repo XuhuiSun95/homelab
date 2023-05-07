@@ -16,6 +16,12 @@ after the configuration above, it will disable the root account ssh login as
 well as the password ssh login. need to use your newly created admin user with
 ssh key.
 
+#### Provision VMs
+```bash
+cd terraform
+terraform apply
+```
+
 #### Regular update
 ```bash
 ansible-playbook -i ansible/inventory ansible/pve-node.yml -u esun-local --become
