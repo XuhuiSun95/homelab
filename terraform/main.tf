@@ -149,11 +149,11 @@ provider "proxmox" {
 /*   ipconfig0 = "ip=192.168.50.254/24,gw=192.168.50.1" */
 /* } */
 
-resource "proxmox_vm_qemu" "unifi-cam-proxy" {
+resource "proxmox_vm_qemu" "heimdall" {
   target_node = "pve1"
   vmid        = 105
-  name        = "unifi-cam-proxy.xuhuisun.local"
-  desc        = "UniFi Camera Proxy"
+  name        = "heimdall.xuhuisun.local"
+  desc        = "Heimdall Application Dashboard"
 
   clone = "ubuntu-cloud"
 
@@ -165,12 +165,38 @@ resource "proxmox_vm_qemu" "unifi-cam-proxy" {
   network {
     model  = "virtio"
     bridge = "vmbr0"
-    tag    = 30
+    tag    = 50
   }
   disk {
     type    = "scsi"
     storage = "local-lvm"
     size    = "10G"
   }
-  ipconfig0 = "ip=192.168.30.3/24,gw=192.168.30.1"
+  ipconfig0 = "ip=192.168.50.241/24,gw=192.168.50.1"
+}
+
+resource "proxmox_vm_qemu" "uptime-kuma" {
+  target_node = "pve1"
+  vmid        = 106
+  name        = "uptime-kuma.xuhuisun.local"
+  desc        = "Uptime Kuma"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 1024
+  sockets = 1
+  cores   = 1
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 50
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-lvm"
+    size    = "10G"
+  }
+  ipconfig0 = "ip=192.168.50.242/24,gw=192.168.50.1"
 }
