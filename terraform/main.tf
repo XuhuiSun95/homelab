@@ -200,3 +200,29 @@ resource "proxmox_vm_qemu" "uptime-kuma" {
   }
   ipconfig0 = "ip=192.168.50.242/24,gw=192.168.50.1"
 }
+
+resource "proxmox_vm_qemu" "homeassistant" {
+  target_node = "pve1"
+  vmid        = 107
+  name        = "homeassistant.xuhuisun.local"
+  desc        = "Home Assistant"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 2048
+  sockets = 1
+  cores   = 2
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 50
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-lvm"
+    size    = "40G"
+  }
+  ipconfig0 = "ip=192.168.50.243/24,gw=192.168.50.1"
+}

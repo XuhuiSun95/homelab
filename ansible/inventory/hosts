@@ -9,3 +9,4 @@ pve1.xuhuisun.local ansible_host=192.168.50.240
 ; worker-02.xuhuisun.local ansible_host=192.168.50.254
 heimdall.xuhuisun.local ansible_host=192.168.50.241
 uptime-kuma.xuhuisun.local ansible_host=192.168.50.242
+homeassistant.xuhuisun.local ansible_host=192.168.50.243
