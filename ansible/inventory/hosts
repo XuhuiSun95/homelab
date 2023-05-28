@@ -2,8 +2,9 @@
 pve1.xuhuisun.local ansible_host=192.168.50.240
 
 [vm]
-master-01.xuhuisun.local ansible_host=192.168.50.250
-master-02.xuhuisun.local ansible_host=192.168.50.251
-master-03.xuhuisun.local ansible_host=192.168.50.252
-worker-01.xuhuisun.local ansible_host=192.168.50.253
-worker-02.xuhuisun.local ansible_host=192.168.50.254
+; master-01.xuhuisun.local ansible_host=192.168.50.250
+; master-02.xuhuisun.local ansible_host=192.168.50.251
+; master-03.xuhuisun.local ansible_host=192.168.50.252
+; worker-01.xuhuisun.local ansible_host=192.168.50.253
+; worker-02.xuhuisun.local ansible_host=192.168.50.254
+unifi-cam-proxy.xuhuisun.local ansible_host=192.168.30.3
