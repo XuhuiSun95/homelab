@@ -226,3 +226,29 @@ resource "proxmox_vm_qemu" "homeassistant" {
   }
   ipconfig0 = "ip=192.168.50.243/24,gw=192.168.50.1"
 }
+
+resource "proxmox_vm_qemu" "scrypted" {
+  target_node = "pve1"
+  vmid        = 108
+  name        = "scrypted.xuhuisun.local"
+  desc        = "Scrypted"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 1024
+  sockets = 1
+  cores   = 1
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 50
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-lvm"
+    size    = "10G"
+  }
+  ipconfig0 = "ip=192.168.50.244/24,gw=192.168.50.1"
+}
