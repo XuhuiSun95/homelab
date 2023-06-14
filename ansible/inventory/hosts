@@ -3,13 +3,17 @@ pve1.xuhuisun.local ansible_host=192.168.60.2
 pve2.xuhuisun.local ansible_host=192.168.60.3
 
 [vm]
-; master-01.xuhuisun.local ansible_host=192.168.50.250
-; master-02.xuhuisun.local ansible_host=192.168.50.251
-; master-03.xuhuisun.local ansible_host=192.168.50.252
-; worker-01.xuhuisun.local ansible_host=192.168.50.253
-; worker-02.xuhuisun.local ansible_host=192.168.50.254
 heimdall.xuhuisun.local ansible_host=192.168.50.241
 uptime-kuma.xuhuisun.local ansible_host=192.168.50.242
 homeassistant.xuhuisun.local ansible_host=192.168.50.243
 scrypted.xuhuisun.local ansible_host=192.168.50.244
 traefik.xuhuisun.local ansible_host=192.168.50.245
+
+master-01.xuhuisun.local ansible_host=192.168.60.201
+master-02.xuhuisun.local ansible_host=192.168.60.202
+master-03.xuhuisun.local ansible_host=192.168.60.203
+worker-01.xuhuisun.local ansible_host=192.168.60.211
+worker-02.xuhuisun.local ansible_host=192.168.60.212
+worker-03.xuhuisun.local ansible_host=192.168.60.213
+worker-04.xuhuisun.local ansible_host=192.168.60.214
+worker-05.xuhuisun.local ansible_host=192.168.60.215

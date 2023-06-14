@@ -34,121 +34,6 @@ provider "proxmox" {
   pm_password = var.proxmox_password
 }
 
-/* resource "proxmox_vm_qemu" "master-01" { */
-/*   target_node = "pve1" */
-/*   vmid        = 100 */
-/*   name        = "master-01.xuhuisun.local" */
-/*   desc        = "k8s master node 01" */
-
-/*   clone = "ubuntu-cloud" */
-
-/*   memory  = 3840 */
-/*   sockets = 1 */
-/*   cores   = 2 */
-/*   cpu     = "" */
-/*   scsihw  = "virtio-scsi-pci" */
-/*   disk { */
-/*     type    = "scsi" */
-/*     storage = "local-lvm" */
-/*     size    = "30G" */
-/*   } */
-/*   ipconfig0 = "ip=192.168.50.250/24,gw=192.168.50.1" */
-/* } */
-
-/* resource "proxmox_vm_qemu" "master-02" { */
-/*   target_node = "pve1" */
-/*   vmid        = 101 */
-/*   name        = "master-02.xuhuisun.local" */
-/*   desc        = "k8s master node 02" */
-
-/*   clone = "ubuntu-cloud" */
-
-/*   memory  = 3840 */
-/*   sockets = 1 */
-/*   cores   = 2 */
-/*   cpu     = "" */
-/*   scsihw  = "virtio-scsi-pci" */
-/*   disk { */
-/*     type    = "scsi" */
-/*     storage = "local-lvm" */
-/*     size    = "30G" */
-/*   } */
-/*   ipconfig0 = "ip=192.168.50.251/24,gw=192.168.50.1" */
-/* } */
-
-/* resource "proxmox_vm_qemu" "master-03" { */
-/*   target_node = "pve1" */
-/*   vmid        = 102 */
-/*   name        = "master-03.xuhuisun.local" */
-/*   desc        = "k8s master node 03" */
-
-/*   clone = "ubuntu-cloud" */
-
-/*   memory  = 3840 */
-/*   sockets = 1 */
-/*   cores   = 2 */
-/*   cpu     = "" */
-/*   scsihw  = "virtio-scsi-pci" */
-/*   disk { */
-/*     type    = "scsi" */
-/*     storage = "local-lvm" */
-/*     size    = "30G" */
-/*   } */
-/*   ipconfig0 = "ip=192.168.50.252/24,gw=192.168.50.1" */
-/* } */
-
-/* resource "proxmox_vm_qemu" "worker-01" { */
-/*   target_node = "pve1" */
-/*   vmid        = 103 */
-/*   name        = "worker-01.xuhuisun.local" */
-/*   desc        = "k8s worker node 01" */
-
-/*   clone = "ubuntu-cloud" */
-
-/*   memory  = 2048 */
-/*   sockets = 1 */
-/*   cores   = 1 */
-/*   cpu     = "" */
-/*   scsihw  = "virtio-scsi-pci" */
-/*   disk { */
-/*     type    = "scsi" */
-/*     storage = "local-lvm" */
-/*     size    = "30G" */
-/*   } */
-/*   disk { */
-/*     type    = "scsi" */
-/*     storage = "slow" */
-/*     size    = "100G" */
-/*   } */
-/*   ipconfig0 = "ip=192.168.50.253/24,gw=192.168.50.1" */
-/* } */
-
-/* resource "proxmox_vm_qemu" "worker-02" { */
-/*   target_node = "pve1" */
-/*   vmid        = 104 */
-/*   name        = "worker-02.xuhuisun.local" */
-/*   desc        = "k8s worker node 02" */
-
-/*   clone = "ubuntu-cloud" */
-
-/*   memory  = 2048 */
-/*   sockets = 1 */
-/*   cores   = 1 */
-/*   cpu     = "" */
-/*   scsihw  = "virtio-scsi-pci" */
-/*   disk { */
-/*     type    = "scsi" */
-/*     storage = "local-lvm" */
-/*     size    = "30G" */
-/*   } */
-/*   disk { */
-/*     type    = "scsi" */
-/*     storage = "slow" */
-/*     size    = "100G" */
-/*   } */
-/*   ipconfig0 = "ip=192.168.50.254/24,gw=192.168.50.1" */
-/* } */
-
 resource "proxmox_vm_qemu" "heimdall" {
   target_node = "pve1"
   vmid        = 105
@@ -277,4 +162,212 @@ resource "proxmox_vm_qemu" "traefik" {
     size    = "10G"
   }
   ipconfig0 = "ip=192.168.50.245/24,gw=192.168.50.1"
+}
+
+resource "proxmox_vm_qemu" "master-01" {
+  target_node = "pve2"
+  vmid        = 201
+  name        = "master-01.xuhuisun.local"
+  desc        = "k8s master node 01"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 16384
+  sockets = 2
+  cores   = 2
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 60
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  ipconfig0 = "ip=192.168.60.201/24,gw=192.168.60.1"
+}
+
+resource "proxmox_vm_qemu" "master-02" {
+  target_node = "pve2"
+  vmid        = 202
+  name        = "master-02.xuhuisun.local"
+  desc        = "k8s master node 02"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 16384
+  sockets = 2
+  cores   = 2
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 60
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  ipconfig0 = "ip=192.168.60.202/24,gw=192.168.60.1"
+}
+
+resource "proxmox_vm_qemu" "master-03" {
+  target_node = "pve2"
+  vmid        = 203
+  name        = "master-03.xuhuisun.local"
+  desc        = "k8s master node 03"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 16384
+  sockets = 2
+  cores   = 2
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 60
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  ipconfig0 = "ip=192.168.60.203/24,gw=192.168.60.1"
+}
+
+resource "proxmox_vm_qemu" "worker-01" {
+  target_node = "pve2"
+  vmid        = 211
+  name        = "worker-01.xuhuisun.local"
+  desc        = "k8s worker node 01"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 8192
+  sockets = 2
+  cores   = 1
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 60
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "30G"
+  }
+  ipconfig0 = "ip=192.168.60.211/24,gw=192.168.60.1"
+}
+
+resource "proxmox_vm_qemu" "worker-02" {
+  target_node = "pve2"
+  vmid        = 212
+  name        = "worker-02.xuhuisun.local"
+  desc        = "k8s worker node 02"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 8192
+  sockets = 2
+  cores   = 1
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 60
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "30G"
+  }
+  ipconfig0 = "ip=192.168.60.212/24,gw=192.168.60.1"
+}
+
+resource "proxmox_vm_qemu" "worker-03" {
+  target_node = "pve2"
+  vmid        = 213
+  name        = "worker-03.xuhuisun.local"
+  desc        = "k8s worker node 03"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 8192
+  sockets = 2
+  cores   = 1
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 60
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "30G"
+  }
+  ipconfig0 = "ip=192.168.60.213/24,gw=192.168.60.1"
+}
+
+resource "proxmox_vm_qemu" "worker-04" {
+  target_node = "pve2"
+  vmid        = 214
+  name        = "worker-04.xuhuisun.local"
+  desc        = "k8s worker node 04"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 8192
+  sockets = 2
+  cores   = 1
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 60
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "30G"
+  }
+  ipconfig0 = "ip=192.168.60.214/24,gw=192.168.60.1"
+}
+
+resource "proxmox_vm_qemu" "worker-05" {
+  target_node = "pve2"
+  vmid        = 215
+  name        = "worker-05.xuhuisun.local"
+  desc        = "k8s worker node 05"
+
+  clone = "ubuntu-cloud"
+
+  memory  = 8192
+  sockets = 2
+  cores   = 1
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 60
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "30G"
+  }
+  ipconfig0 = "ip=192.168.60.215/24,gw=192.168.60.1"
 }
