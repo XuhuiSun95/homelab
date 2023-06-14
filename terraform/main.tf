@@ -32,6 +32,14 @@ provider "proxmox" {
   pm_api_url  = var.proxmox_api_url
   pm_user     = var.proxmox_user
   pm_password = var.proxmox_password
+
+  pm_log_enable = true
+  pm_log_file   = "terraform-plugin-proxmox.log"
+  pm_debug      = true
+  pm_log_levels = {
+    _default    = "debug"
+    _capturelog = ""
+  }
 }
 
 resource "proxmox_vm_qemu" "heimdall" {
@@ -40,7 +48,8 @@ resource "proxmox_vm_qemu" "heimdall" {
   name        = "heimdall.xuhuisun.local"
   desc        = "Heimdall Application Dashboard"
 
-  clone = "ubuntu-cloud"
+  clone  = "ubuntu-cloud"
+  onboot = true
 
   memory  = 1024
   sockets = 1
@@ -66,7 +75,8 @@ resource "proxmox_vm_qemu" "uptime-kuma" {
   name        = "uptime-kuma.xuhuisun.local"
   desc        = "Uptime Kuma"
 
-  clone = "ubuntu-cloud"
+  clone  = "ubuntu-cloud"
+  onboot = true
 
   memory  = 1024
   sockets = 1
@@ -144,7 +154,8 @@ resource "proxmox_vm_qemu" "traefik" {
   name        = "traefik.xuhuisun.local"
   desc        = "Traefik proxy"
 
-  clone = "ubuntu-cloud"
+  clone  = "ubuntu-cloud"
+  onboot = true
 
   memory  = 1024
   sockets = 1
@@ -170,7 +181,8 @@ resource "proxmox_vm_qemu" "master-01" {
   name        = "master-01.xuhuisun.local"
   desc        = "k8s master node 01"
 
-  clone = "ubuntu-cloud"
+  clone  = "ubuntu-cloud-2"
+  onboot = true
 
   memory  = 16384
   sockets = 2
@@ -196,7 +208,8 @@ resource "proxmox_vm_qemu" "master-02" {
   name        = "master-02.xuhuisun.local"
   desc        = "k8s master node 02"
 
-  clone = "ubuntu-cloud"
+  clone  = "ubuntu-cloud-2"
+  onboot = true
 
   memory  = 16384
   sockets = 2
@@ -222,7 +235,8 @@ resource "proxmox_vm_qemu" "master-03" {
   name        = "master-03.xuhuisun.local"
   desc        = "k8s master node 03"
 
-  clone = "ubuntu-cloud"
+  clone  = "ubuntu-cloud-2"
+  onboot = true
 
   memory  = 16384
   sockets = 2
@@ -248,7 +262,8 @@ resource "proxmox_vm_qemu" "worker-01" {
   name        = "worker-01.xuhuisun.local"
   desc        = "k8s worker node 01"
 
-  clone = "ubuntu-cloud"
+  clone  = "ubuntu-cloud-2"
+  onboot = true
 
   memory  = 8192
   sockets = 2
@@ -274,7 +289,8 @@ resource "proxmox_vm_qemu" "worker-02" {
   name        = "worker-02.xuhuisun.local"
   desc        = "k8s worker node 02"
 
-  clone = "ubuntu-cloud"
+  clone  = "ubuntu-cloud-2"
+  onboot = true
 
   memory  = 8192
   sockets = 2
@@ -300,7 +316,8 @@ resource "proxmox_vm_qemu" "worker-03" {
   name        = "worker-03.xuhuisun.local"
   desc        = "k8s worker node 03"
 
-  clone = "ubuntu-cloud"
+  clone  = "ubuntu-cloud-2"
+  onboot = true
 
   memory  = 8192
   sockets = 2
@@ -326,7 +343,7 @@ resource "proxmox_vm_qemu" "worker-04" {
   name        = "worker-04.xuhuisun.local"
   desc        = "k8s worker node 04"
 
-  clone = "ubuntu-cloud"
+  clone = "ubuntu-cloud-2"
 
   memory  = 8192
   sockets = 2
@@ -352,7 +369,7 @@ resource "proxmox_vm_qemu" "worker-05" {
   name        = "worker-05.xuhuisun.local"
   desc        = "k8s worker node 05"
 
-  clone = "ubuntu-cloud"
+  clone = "ubuntu-cloud-2"
 
   memory  = 8192
   sockets = 2
