@@ -1,5 +1,6 @@
 [pve]
-pve1.xuhuisun.local ansible_host=192.168.50.240
+pve1.xuhuisun.local ansible_host=192.168.60.2
+pve2.xuhuisun.local ansible_host=192.168.60.3
 
 [vm]
 ; master-01.xuhuisun.local ansible_host=192.168.50.250
