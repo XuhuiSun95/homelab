@@ -1,0 +1,3 @@
+cloudimg_vmid: 9001
+cloudimg_vm_name: "ubuntu-cloud-2"
+cloudimg_vm_storage: "local-zfs"

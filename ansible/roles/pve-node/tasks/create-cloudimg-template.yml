@@ -4,7 +4,6 @@
   failed_when:
     - qm_status_output.rc != 0
     - qm_status_output.rc != 2
-  run_once: True
   tags:
     - create-cloudimg-template
 
@@ -13,42 +12,36 @@
     url: "{{ cloudimg_download_url }}"
     dest: "{{ cloudimg_dest }}"
   when: qm_status_output.rc  == 2
-  run_once: True
   tags:
     - create-cloudimg-template
 
 - name: "{{ role_name }} > create-cloudimg-template | Create vm"
-  ansible.builtin.command: "qm create {{ cloudimg_vmid }} --memory 2048 --core 2 --name ubuntu-cloud --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci"
+  ansible.builtin.command: "qm create {{ cloudimg_vmid }} --memory 2048 --core 2 --name {{ cloudimg_vm_name }} --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci"
   when: qm_status_output.rc  == 2
-  run_once: True
   tags:
     - create-cloudimg-template
 
-- name: "{{ role_name }} > create-cloudimg-template | Import disk to local-lvm and attach as a SCSI driver"
-  ansible.builtin.command: "qm set {{ cloudimg_vmid }} --scsi0 local-lvm:0,import-from={{cloudimg_dest}}"
+- name: "{{ role_name }} > create-cloudimg-template | Import disk to {{ cloudimg_vm_storage }} and attach as a SCSI driver"
+  ansible.builtin.command: "qm set {{ cloudimg_vmid }} --scsi0 {{ cloudimg_vm_storage }}:0,import-from={{cloudimg_dest}}"
   when: qm_status_output.rc  == 2
-  run_once: True
   tags:
     - create-cloudimg-template
 
 - name: "{{ role_name }} > create-cloudimg-template | Add cloud-init CD-ROM drive"
-  ansible.builtin.command: "qm set {{ cloudimg_vmid }} --ide2 local-lvm:cloudinit"
+  ansible.builtin.command: "qm set {{ cloudimg_vmid }} --ide2 {{ cloudimg_vm_storage }}:cloudinit"
   when: qm_status_output.rc  == 2
-  run_once: True
   tags:
     - create-cloudimg-template
 
 - name: "{{ role_name }} > create-cloudimg-template | Set boot directly from img"
   ansible.builtin.command: "qm set {{ cloudimg_vmid }} --boot order=scsi0"
   when: qm_status_output.rc  == 2
-  run_once: True
   tags:
     - create-cloudimg-template
 
 - name: "{{ role_name }} > create-cloudimg-template | Set serial console"
   ansible.builtin.command: "qm set {{ cloudimg_vmid }} --serial0 socket --vga serial0"
   when: qm_status_output.rc  == 2
-  run_once: True
   tags:
     - create-cloudimg-template
 
@@ -57,20 +50,17 @@
     content: "{{ cloudinit_sshkeys }}"
     dest: /tmp/sshkey.pub
   when: qm_status_output.rc  == 2
-  run_once: True
   tags:
     - create-cloudimg-template
 
 - name: "{{ role_name }} > create-cloudimg-template | Set cloud-init config"
   ansible.builtin.command: "qm set {{ cloudimg_vmid }} --agent enabled=1 --ciuser {{ cloudinit_user }} --ipconfig0 ip=dhcp --sshkeys /tmp/sshkey.pub"
   when: qm_status_output.rc  == 2
-  run_once: True
   tags:
     - create-cloudimg-template
 
 - name: "{{ role_name }} > create-cloudimg-template | Convert to template"
   ansible.builtin.command: "qm template {{ cloudimg_vmid }}"
   when: qm_status_output.rc  == 2
-  run_once: True
   tags:
     - create-cloudimg-template

@@ -1,4 +1,6 @@
 cloudimg_vmid: 9000
+cloudimg_vm_name: "ubuntu-cloud"
+cloudimg_vm_storage: "local-lvm"
 cloudimg_version: "jammy"
 cloudimg_arch: "amd64"
 cloudimg_name: "{{ cloudimg_version }}-server-cloudimg-{{ cloudimg_arch }}.img"
