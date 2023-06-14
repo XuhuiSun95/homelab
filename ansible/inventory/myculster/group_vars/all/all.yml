@@ -12,7 +12,7 @@ bin_dir: /usr/local/bin
 
 kube_vip_enabled: true
 kube_vip_controlplane_enabled: true
-kube_vip_address: 192.168.50.249
+kube_vip_address: 192.168.60.20
 kube_vip_arp_enabled: true
 
 ## External LB example config
@@ -25,11 +25,6 @@ kube_vip_arp_enabled: true
 # loadbalancer_apiserver_localhost: true
 # valid options are "nginx" or "haproxy"
 # loadbalancer_apiserver_type: nginx  # valid values "nginx" or "haproxy"
-
-## If the cilium is going to be used in strict mode, we can use the
-## localhost connection and not use the external LB. If this parameter is
-## not specified, the first node to connect to kubeapi will be used.
-# use_localhost_as_kubeapi_loadbalancer: true
 
 ## Local loadbalancer should use this port
 ## And must be set port 6443
@@ -143,3 +138,6 @@ ntp_servers:
 
 ## Used to control no_log attribute
 unsafe_show_logs: false
+
+## If enabled it will allow kubespray to attempt setup even if the distribution is not supported. For unsupported distributions this can lead to unexpected failures in some cases.
+allow_unsupported_distribution_setup: false
