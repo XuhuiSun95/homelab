@@ -281,6 +281,26 @@ resource "proxmox_vm_qemu" "worker-01" {
     storage = "local-zfs"
     size    = "30G"
   }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
   ipconfig0 = "ip=192.168.60.211/24,gw=192.168.60.1"
 }
 
@@ -307,6 +327,26 @@ resource "proxmox_vm_qemu" "worker-02" {
     type    = "scsi"
     storage = "local-zfs"
     size    = "30G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
   }
   ipconfig0 = "ip=192.168.60.212/24,gw=192.168.60.1"
 }
@@ -335,6 +375,26 @@ resource "proxmox_vm_qemu" "worker-03" {
     storage = "local-zfs"
     size    = "30G"
   }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
   ipconfig0 = "ip=192.168.60.213/24,gw=192.168.60.1"
 }
 
@@ -361,6 +421,26 @@ resource "proxmox_vm_qemu" "worker-04" {
     storage = "local-zfs"
     size    = "30G"
   }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
   ipconfig0 = "ip=192.168.60.214/24,gw=192.168.60.1"
 }
 
@@ -386,6 +466,26 @@ resource "proxmox_vm_qemu" "worker-05" {
     type    = "scsi"
     storage = "local-zfs"
     size    = "30G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "40G"
   }
   ipconfig0 = "ip=192.168.60.215/24,gw=192.168.60.1"
 }
