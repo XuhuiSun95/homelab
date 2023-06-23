@@ -148,34 +148,6 @@ resource "proxmox_vm_qemu" "traefik" {
   ipconfig0 = "ip=192.168.50.245/24,gw=192.168.50.1"
 }
 
-resource "proxmox_vm_qemu" "heimdall" {
-  target_node = "pve2"
-  vmid        = 105
-  name        = "heimdall.xuhuisun.local"
-  desc        = "Heimdall Application Dashboard"
-
-  clone  = "ubuntu-cloud-2"
-  onboot = true
-
-  memory  = 1024
-  sockets = 1
-  cores   = 1
-  cpu     = ""
-  scsihw  = "virtio-scsi-pci"
-  network {
-    model  = "virtio"
-    bridge = "vmbr0"
-    tag    = 60
-  }
-  disk {
-    type    = "scsi"
-    storage = "local-zfs"
-    size    = "10G"
-  }
-  ipconfig0 = "ip=192.168.60.241/24,gw=192.168.60.1"
-}
-
-
 resource "proxmox_vm_qemu" "master-01" {
   target_node = "pve2"
   vmid        = 201
@@ -538,4 +510,31 @@ resource "proxmox_vm_qemu" "worker-05" {
     size    = "90G"
   }
   ipconfig0 = "ip=192.168.60.215/24,gw=192.168.60.1"
+}
+
+resource "proxmox_vm_qemu" "heimdall" {
+  target_node = "pve2"
+  vmid        = 221
+  name        = "heimdall.xuhuisun.local"
+  desc        = "Heimdall Application Dashboard"
+
+  clone  = "ubuntu-cloud-2"
+  onboot = true
+
+  memory  = 1024
+  sockets = 1
+  cores   = 1
+  cpu     = ""
+  scsihw  = "virtio-scsi-pci"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 60
+  }
+  disk {
+    type    = "scsi"
+    storage = "local-zfs"
+    size    = "10G"
+  }
+  ipconfig0 = "ip=192.168.60.241/24,gw=192.168.60.1"
 }
