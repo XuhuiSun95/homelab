@@ -42,33 +42,6 @@ provider "proxmox" {
   }
 }
 
-/* resource "proxmox_vm_qemu" "uptime-kuma" { */
-/*   target_node = "pve1" */
-/*   vmid        = 106 */
-/*   name        = "uptime-kuma.xuhuisun.local" */
-/*   desc        = "Uptime Kuma" */
-
-/*   clone  = "ubuntu-cloud" */
-/*   onboot = true */
-
-/*   memory  = 1024 */
-/*   sockets = 1 */
-/*   cores   = 1 */
-/*   cpu     = "" */
-/*   scsihw  = "virtio-scsi-pci" */
-/*   network { */
-/*     model  = "virtio" */
-/*     bridge = "vmbr0" */
-/*     tag    = 50 */
-/*   } */
-/*   disk { */
-/*     type    = "scsi" */
-/*     storage = "local-lvm" */
-/*     size    = "10G" */
-/*   } */
-/*   ipconfig0 = "ip=192.168.50.242/24,gw=192.168.50.1" */
-/* } */
-
 /* resource "proxmox_vm_qemu" "homeassistant" { */
 /*   target_node = "pve1" */
 /*   vmid        = 107 */
@@ -119,33 +92,6 @@ provider "proxmox" {
 /*     size    = "10G" */
 /*   } */
 /*   ipconfig0 = "ip=192.168.50.244/24,gw=192.168.50.1" */
-/* } */
-
-/* resource "proxmox_vm_qemu" "traefik" { */
-/*   target_node = "pve1" */
-/*   vmid        = 109 */
-/*   name        = "traefik.xuhuisun.local" */
-/*   desc        = "Traefik proxy" */
-
-/*   clone  = "ubuntu-cloud" */
-/*   onboot = true */
-
-/*   memory  = 1024 */
-/*   sockets = 1 */
-/*   cores   = 1 */
-/*   cpu     = "" */
-/*   scsihw  = "virtio-scsi-pci" */
-/*   network { */
-/*     model  = "virtio" */
-/*     bridge = "vmbr0" */
-/*     tag    = 50 */
-/*   } */
-/*   disk { */
-/*     type    = "scsi" */
-/*     storage = "local-lvm" */
-/*     size    = "10G" */
-/*   } */
-/*   ipconfig0 = "ip=192.168.50.245/24,gw=192.168.50.1" */
 /* } */
 
 resource "proxmox_vm_qemu" "master-01" {
@@ -564,34 +510,4 @@ resource "proxmox_vm_qemu" "worker-05" {
   /*   ssd     = 1 */
   /* } */
   ipconfig0 = "ip=192.168.60.215/24,gw=192.168.60.1"
-}
-
-resource "proxmox_vm_qemu" "heimdall" {
-  target_node = "pve2"
-  vmid        = 221
-  name        = "heimdall.xuhuisun.local"
-  desc        = "Heimdall Application Dashboard"
-
-  clone   = "ubuntu-cloud-2"
-  os_type = "cloud-init"
-  onboot  = true
-
-  memory  = 1024
-  sockets = 1
-  cores   = 1
-  cpu     = ""
-  numa    = true
-  scsihw  = "virtio-scsi-pci"
-  network {
-    model  = "virtio"
-    bridge = "vmbr0"
-    tag    = 60
-  }
-  disk {
-    type    = "scsi"
-    storage = "local-zfs"
-    size    = "10G"
-    ssd     = 1
-  }
-  ipconfig0 = "ip=192.168.60.241/24,gw=192.168.60.1"
 }
