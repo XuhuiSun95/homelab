@@ -194,9 +194,9 @@ resource "proxmox_vm_qemu" "worker-01" {
   os_type = "cloud-init"
   onboot  = true
 
-  memory  = 8192
+  memory  = 49152
   sockets = 2
-  cores   = 1
+  cores   = 4
   cpu     = ""
   numa    = true
   scsihw  = "virtio-scsi-pci"
@@ -260,9 +260,9 @@ resource "proxmox_vm_qemu" "worker-02" {
   os_type = "cloud-init"
   onboot  = true
 
-  memory  = 8192
+  memory  = 49152
   sockets = 2
-  cores   = 1
+  cores   = 4
   cpu     = ""
   numa    = true
   scsihw  = "virtio-scsi-pci"
@@ -326,9 +326,9 @@ resource "proxmox_vm_qemu" "worker-03" {
   os_type = "cloud-init"
   onboot  = true
 
-  memory  = 8192
+  memory  = 49152
   sockets = 2
-  cores   = 1
+  cores   = 4
   cpu     = ""
   numa    = true
   scsihw  = "virtio-scsi-pci"
@@ -390,10 +390,11 @@ resource "proxmox_vm_qemu" "worker-04" {
 
   clone   = "ubuntu-cloud-2"
   os_type = "cloud-init"
+  onboot  = true
 
-  memory  = 8192
+  memory  = 49152
   sockets = 2
-  cores   = 1
+  cores   = 4
   cpu     = ""
   numa    = true
   scsihw  = "virtio-scsi-pci"
@@ -455,10 +456,11 @@ resource "proxmox_vm_qemu" "worker-05" {
 
   clone   = "ubuntu-cloud-2"
   os_type = "cloud-init"
+  onboot  = true
 
-  memory  = 8192
+  memory  = 49152
   sockets = 2
-  cores   = 1
+  cores   = 4
   cpu     = ""
   numa    = true
   scsihw  = "virtio-scsi-pci"
