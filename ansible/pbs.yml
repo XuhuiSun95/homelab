@@ -1,0 +1,4 @@
+- hosts: pbs
+  roles:
+    - role: manage-users
+    - role: common
