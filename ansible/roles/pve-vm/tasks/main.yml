@@ -1,9 +1,3 @@
-- name: Update maximum receive buffer size for Debian
-  import_tasks: max-receive-buffer-size.yml
-  when: ansible_facts['os_family']|lower == 'debian'
-  tags:
-    - max-receive-buffer-size
-
 - name: Install qemu-guest-agent for Debian
   import_tasks: qemu-guest-agent.yml
   when: ansible_facts['os_family']|lower == 'debian'
