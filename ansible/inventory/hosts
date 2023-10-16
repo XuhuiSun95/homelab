@@ -15,3 +15,5 @@ worker-02.xuhuisun.local ansible_host=192.168.60.212
 worker-03.xuhuisun.local ansible_host=192.168.60.213
 worker-04.xuhuisun.local ansible_host=192.168.60.214
 worker-05.xuhuisun.local ansible_host=192.168.60.215
+
+xuhui-LinuxWorkstationVM.xuhuisun.local ansible_host=192.168.60.231

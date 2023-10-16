@@ -16,13 +16,13 @@
     - create-cloudimg-template
 
 - name: "{{ role_name }} > create-cloudimg-template | Create vm"
-  ansible.builtin.command: "qm create {{ cloudimg_vmid }} --memory 2048 --core 2 --name {{ cloudimg_vm_name }} --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci"
+  ansible.builtin.command: "qm create {{ cloudimg_vmid }} --memory 2048 --core 2 --name {{ cloudimg_vm_name }} --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-single"
   when: qm_status_output.rc  == 2
   tags:
     - create-cloudimg-template
 
 - name: "{{ role_name }} > create-cloudimg-template | Import disk to {{ cloudimg_vm_storage }} and attach as a SCSI driver"
-  ansible.builtin.command: "qm set {{ cloudimg_vmid }} --scsi0 {{ cloudimg_vm_storage }}:0,import-from={{cloudimg_dest}}"
+  ansible.builtin.command: "qm set {{ cloudimg_vmid }} --scsi0 {{ cloudimg_vm_storage }}:0,import-from={{cloudimg_dest}},iothread=1,ssd=1"
   when: qm_status_output.rc  == 2
   tags:
     - create-cloudimg-template
