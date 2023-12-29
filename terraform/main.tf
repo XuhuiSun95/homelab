@@ -7,9 +7,13 @@ terraform {
   }
 
   required_providers {
+    /* proxmox = { */
+    /*   source  = "Telmate/proxmox" */
+    /*   version = "2.9.14" */
+    /* } */
     proxmox = {
-      source  = "Telmate/proxmox"
-      version = "2.9.14"
+      source  = "thegameprofi/proxmox"
+      version = ">= 2.9.15"
     }
   }
 }
@@ -53,8 +57,8 @@ provider "proxmox" {
 /*   memory  = 2048 */
 /*   sockets = 1 */
 /*   cores   = 2 */
-/*   cpu     = "" */
-/*   scsihw  = "virtio-scsi-pci" */
+/*   cpu     ="x86-64-v3" */
+/*   scsihw  = "virtio-scsi-single" */
 /*   network { */
 /*     model  = "virtio" */
 /*     bridge = "vmbr0" */
@@ -66,32 +70,6 @@ provider "proxmox" {
 /*     size    = "40G" */
 /*   } */
 /*   ipconfig0 = "ip=192.168.50.243/24,gw=192.168.50.1" */
-/* } */
-
-/* resource "proxmox_vm_qemu" "scrypted" { */
-/*   target_node = "pve1" */
-/*   vmid        = 108 */
-/*   name        = "scrypted.xuhuisun.local" */
-/*   desc        = "Scrypted" */
-
-/*   clone = "ubuntu-cloud" */
-
-/*   memory  = 1024 */
-/*   sockets = 1 */
-/*   cores   = 1 */
-/*   cpu     = "" */
-/*   scsihw  = "virtio-scsi-pci" */
-/*   network { */
-/*     model  = "virtio" */
-/*     bridge = "vmbr0" */
-/*     tag    = 50 */
-/*   } */
-/*   disk { */
-/*     type    = "scsi" */
-/*     storage = "local-lvm" */
-/*     size    = "10G" */
-/*   } */
-/*   ipconfig0 = "ip=192.168.50.244/24,gw=192.168.50.1" */
 /* } */
 
 resource "proxmox_vm_qemu" "master-01" {
@@ -107,19 +85,20 @@ resource "proxmox_vm_qemu" "master-01" {
   memory  = 16384
   sockets = 2
   cores   = 2
-  cpu     = ""
+  cpu     = "x86-64-v3"
   numa    = true
-  scsihw  = "virtio-scsi-pci"
+  scsihw  = "virtio-scsi-single"
   network {
     model  = "virtio"
     bridge = "vmbr0"
     tag    = 60
   }
   disk {
-    type    = "scsi"
-    storage = "local-zfs"
-    size    = "40G"
-    ssd     = 1
+    type     = "scsi"
+    storage  = "local-zfs"
+    size     = "40G"
+    iothread = 1
+    ssd      = 1
   }
   ipconfig0 = "ip=192.168.60.201/24,gw=192.168.60.1"
 }
@@ -137,19 +116,20 @@ resource "proxmox_vm_qemu" "master-02" {
   memory  = 16384
   sockets = 2
   cores   = 2
-  cpu     = ""
+  cpu     = "x86-64-v3"
   numa    = true
-  scsihw  = "virtio-scsi-pci"
+  scsihw  = "virtio-scsi-single"
   network {
     model  = "virtio"
     bridge = "vmbr0"
     tag    = 60
   }
   disk {
-    type    = "scsi"
-    storage = "local-zfs"
-    size    = "40G"
-    ssd     = 1
+    type     = "scsi"
+    storage  = "local-zfs"
+    size     = "40G"
+    iothread = 1
+    ssd      = 1
   }
   ipconfig0 = "ip=192.168.60.202/24,gw=192.168.60.1"
 }
@@ -167,19 +147,20 @@ resource "proxmox_vm_qemu" "master-03" {
   memory  = 16384
   sockets = 2
   cores   = 2
-  cpu     = ""
+  cpu     = "x86-64-v3"
   numa    = true
-  scsihw  = "virtio-scsi-pci"
+  scsihw  = "virtio-scsi-single"
   network {
     model  = "virtio"
     bridge = "vmbr0"
     tag    = 60
   }
   disk {
-    type    = "scsi"
-    storage = "local-zfs"
-    size    = "40G"
-    ssd     = 1
+    type     = "scsi"
+    storage  = "local-zfs"
+    size     = "40G"
+    iothread = 1
+    ssd      = 1
   }
   ipconfig0 = "ip=192.168.60.203/24,gw=192.168.60.1"
 }
@@ -197,55 +178,62 @@ resource "proxmox_vm_qemu" "worker-01" {
   memory  = 49152
   sockets = 2
   cores   = 4
-  cpu     = ""
+  cpu     = "x86-64-v3"
   numa    = true
-  scsihw  = "virtio-scsi-pci"
+  scsihw  = "virtio-scsi-single"
   network {
     model  = "virtio"
     bridge = "vmbr0"
     tag    = 60
   }
   disk {
-    type    = "scsi"
-    storage = "local-zfs"
-    size    = "30G"
-    ssd     = 1
+    type     = "scsi"
+    storage  = "local-zfs"
+    size     = "30G"
+    iothread = 1
+    ssd      = 1
   }
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "90G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "90G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   ipconfig0 = "ip=192.168.60.211/24,gw=192.168.60.1"
 }
@@ -263,55 +251,62 @@ resource "proxmox_vm_qemu" "worker-02" {
   memory  = 49152
   sockets = 2
   cores   = 4
-  cpu     = ""
+  cpu     = "x86-64-v3"
   numa    = true
-  scsihw  = "virtio-scsi-pci"
+  scsihw  = "virtio-scsi-single"
   network {
     model  = "virtio"
     bridge = "vmbr0"
     tag    = 60
   }
   disk {
-    type    = "scsi"
-    storage = "local-zfs"
-    size    = "30G"
-    ssd     = 1
+    type     = "scsi"
+    storage  = "local-zfs"
+    size     = "30G"
+    iothread = 1
+    ssd      = 1
   }
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "90G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "90G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   ipconfig0 = "ip=192.168.60.212/24,gw=192.168.60.1"
 }
@@ -329,55 +324,62 @@ resource "proxmox_vm_qemu" "worker-03" {
   memory  = 49152
   sockets = 2
   cores   = 4
-  cpu     = ""
+  cpu     = "x86-64-v3"
   numa    = true
-  scsihw  = "virtio-scsi-pci"
+  scsihw  = "virtio-scsi-single"
   network {
     model  = "virtio"
     bridge = "vmbr0"
     tag    = 60
   }
   disk {
-    type    = "scsi"
-    storage = "local-zfs"
-    size    = "30G"
-    ssd     = 1
+    type     = "scsi"
+    storage  = "local-zfs"
+    size     = "30G"
+    iothread = 1
+    ssd      = 1
   }
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "90G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "90G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   ipconfig0 = "ip=192.168.60.213/24,gw=192.168.60.1"
 }
@@ -395,55 +397,62 @@ resource "proxmox_vm_qemu" "worker-04" {
   memory  = 49152
   sockets = 2
   cores   = 4
-  cpu     = ""
+  cpu     = "x86-64-v3"
   numa    = true
-  scsihw  = "virtio-scsi-pci"
+  scsihw  = "virtio-scsi-single"
   network {
     model  = "virtio"
     bridge = "vmbr0"
     tag    = 60
   }
   disk {
-    type    = "scsi"
-    storage = "local-zfs"
-    size    = "30G"
-    ssd     = 1
+    type     = "scsi"
+    storage  = "local-zfs"
+    size     = "30G"
+    iothread = 1
+    ssd      = 1
   }
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "90G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "90G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   ipconfig0 = "ip=192.168.60.214/24,gw=192.168.60.1"
 }
@@ -461,55 +470,94 @@ resource "proxmox_vm_qemu" "worker-05" {
   memory  = 49152
   sockets = 2
   cores   = 4
-  cpu     = ""
+  cpu     = "x86-64-v3"
   numa    = true
-  scsihw  = "virtio-scsi-pci"
+  scsihw  = "virtio-scsi-single"
   network {
     model  = "virtio"
     bridge = "vmbr0"
     tag    = 60
   }
   disk {
-    type    = "scsi"
-    storage = "local-zfs"
-    size    = "30G"
-    ssd     = 1
+    type     = "scsi"
+    storage  = "local-zfs"
+    size     = "30G"
+    iothread = 1
+    ssd      = 1
   }
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "40G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "90G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   /* disk { */
   /*   type    = "scsi" */
   /*   storage = "local-zfs" */
   /*   size    = "90G" */
-  /*   ssd     = 1 */
+  /*   iothread=1
+ssd=1 */
   /* } */
   ipconfig0 = "ip=192.168.60.215/24,gw=192.168.60.1"
+}
+
+resource "proxmox_vm_qemu" "scrypted" {
+  target_node = "pve2"
+  vmid        = 221
+  name        = "scrypted.xuhuisun.local"
+  desc        = "Scrypted"
+
+  clone   = "ubuntu-cloud-2"
+  os_type = "cloud-init"
+  onboot  = true
+
+  memory  = 1024
+  sockets = 1
+  cores   = 1
+  cpu     = "x86-64-v3"
+  numa    = true
+  scsihw  = "virtio-scsi-single"
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+    tag    = 60
+  }
+  disk {
+    type     = "scsi"
+    storage  = "local-zfs"
+    size     = "10G"
+    iothread = 1
+    ssd      = 1
+    volume   = "local-zfs:vm-221-disk-0"
+  }
+  ipconfig0 = "ip=192.168.60.221/24,gw=192.168.60.1"
 }

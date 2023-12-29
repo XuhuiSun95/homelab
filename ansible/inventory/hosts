@@ -5,8 +5,6 @@ pbs.xuhuisun.local ansible_host=192.168.60.2
 pve2.xuhuisun.local ansible_host=192.168.60.3
 
 [vm]
-# scrypted.xuhuisun.local ansible_host=192.168.50.244
-
 master-01.xuhuisun.local ansible_host=192.168.60.201
 master-02.xuhuisun.local ansible_host=192.168.60.202
 master-03.xuhuisun.local ansible_host=192.168.60.203
@@ -15,5 +13,7 @@ worker-02.xuhuisun.local ansible_host=192.168.60.212
 worker-03.xuhuisun.local ansible_host=192.168.60.213
 worker-04.xuhuisun.local ansible_host=192.168.60.214
 worker-05.xuhuisun.local ansible_host=192.168.60.215
+
+scrypted.xuhuisun.local ansible_host=192.168.60.221
 
 xuhui-LinuxWorkstationVM.xuhuisun.local ansible_host=192.168.60.231
