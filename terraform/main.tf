@@ -549,7 +549,7 @@ resource "proxmox_vm_qemu" "scrypted" {
   network {
     model  = "virtio"
     bridge = "vmbr0"
-    tag    = 60
+    tag    = 20
   }
   disk {
     type     = "scsi"
@@ -559,37 +559,5 @@ resource "proxmox_vm_qemu" "scrypted" {
     ssd      = 1
     volume   = "local-zfs:vm-221-disk-0"
   }
-  ipconfig0 = "ip=192.168.60.221/24,gw=192.168.60.1"
-}
-
-resource "proxmox_vm_qemu" "fusion" {
-  target_node = "pve2"
-  vmid        = 222
-  name        = "fusion.xuhuisun.local"
-  desc        = "IPConfigure Fusion"
-
-  clone   = "ubuntu-cloud-2"
-  os_type = "cloud-init"
-  onboot  = true
-
-  memory  = 2048
-  sockets = 2
-  cores   = 1
-  cpu     = "x86-64-v3"
-  numa    = true
-  scsihw  = "virtio-scsi-single"
-  network {
-    model  = "virtio"
-    bridge = "vmbr0"
-    tag    = 60
-  }
-  disk {
-    type     = "scsi"
-    storage  = "local-zfs"
-    size     = "10G"
-    iothread = 1
-    ssd      = 1
-    volume   = "local-zfs:vm-222-disk-0"
-  }
-  ipconfig0 = "ip=192.168.60.222/24,gw=192.168.60.1"
+  ipconfig0 = "ip=192.168.20.221/24,gw=192.168.20.1"
 }
