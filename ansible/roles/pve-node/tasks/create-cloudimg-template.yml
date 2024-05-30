@@ -16,7 +16,7 @@
     - create-cloudimg-template
 
 - name: "{{ role_name }} > create-cloudimg-template | Create vm"
-  ansible.builtin.command: "qm create {{ cloudimg_vmid }} --memory 2048 --core 2 --name {{ cloudimg_vm_name }} --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-single"
+  ansible.builtin.command: "qm create {{ cloudimg_vmid }} --memory 2048 --core 2 --cpu x86-64-v3 --numa 1 --ostype l26 --name {{ cloudimg_vm_name }} --net0 virtio,bridge=vmbr0,mtu=1 --scsihw virtio-scsi-single"
   when: qm_status_output.rc  == 2
   tags:
     - create-cloudimg-template

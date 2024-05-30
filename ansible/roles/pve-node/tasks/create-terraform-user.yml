@@ -14,6 +14,7 @@
   failed_when:
     - pveum_user_status_output.rc != 0
     - pveum_user_status_output.rc != 2
+    - pveum_user_status_output.rc != 255
   run_once: True
   tags:
     - create-terraform-user

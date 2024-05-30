@@ -1,8 +1,8 @@
 cloudimg_vmid: 9000
-cloudimg_vm_name: "ubuntu-cloud"
 cloudimg_vm_storage: "local-lvm"
-cloudimg_version: "jammy"
+cloudimg_version: "noble"
 cloudimg_arch: "amd64"
+cloudimg_vm_name: "{{ cloudimg_version }}-server-cloudimg-{{ cloudimg_arch }}"
 cloudimg_name: "{{ cloudimg_version }}-server-cloudimg-{{ cloudimg_arch }}.img"
 cloudimg_download_url: "https://cloud-images.ubuntu.com/{{ cloudimg_version }}/current/{{ cloudimg_name }}"
 cloudimg_dest: "/tmp/{{ cloudimg_name }}"
