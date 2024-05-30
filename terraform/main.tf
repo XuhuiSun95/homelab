@@ -46,39 +46,13 @@ provider "proxmox" {
   }
 }
 
-/* resource "proxmox_vm_qemu" "homeassistant" { */
-/*   target_node = "pve1" */
-/*   vmid        = 107 */
-/*   name        = "homeassistant.xuhuisun.local" */
-/*   desc        = "Home Assistant" */
-
-/*   clone = "ubuntu-cloud" */
-
-/*   memory  = 2048 */
-/*   sockets = 1 */
-/*   cores   = 2 */
-/*   cpu     ="x86-64-v3" */
-/*   scsihw  = "virtio-scsi-single" */
-/*   network { */
-/*     model  = "virtio" */
-/*     bridge = "vmbr0" */
-/*     tag    = 50 */
-/*   } */
-/*   disk { */
-/*     type    = "scsi" */
-/*     storage = "local-lvm" */
-/*     size    = "40G" */
-/*   } */
-/*   ipconfig0 = "ip=192.168.50.243/24,gw=192.168.50.1" */
-/* } */
-
 resource "proxmox_vm_qemu" "master-01" {
   target_node = "pve2"
   vmid        = 201
   name        = "master-01.xuhuisun.local"
   desc        = "k8s master node 01"
 
-  clone   = "ubuntu-cloud-2"
+  clone   = "noble-server-cloudimg-amd64"
   os_type = "cloud-init"
   onboot  = true
 
@@ -109,7 +83,7 @@ resource "proxmox_vm_qemu" "master-02" {
   name        = "master-02.xuhuisun.local"
   desc        = "k8s master node 02"
 
-  clone   = "ubuntu-cloud-2"
+  clone   = "noble-server-cloudimg-amd64"
   os_type = "cloud-init"
   onboot  = true
 
@@ -140,7 +114,7 @@ resource "proxmox_vm_qemu" "master-03" {
   name        = "master-03.xuhuisun.local"
   desc        = "k8s master node 03"
 
-  clone   = "ubuntu-cloud-2"
+  clone   = "noble-server-cloudimg-amd64"
   os_type = "cloud-init"
   onboot  = true
 
@@ -171,7 +145,7 @@ resource "proxmox_vm_qemu" "worker-01" {
   name        = "worker-01.xuhuisun.local"
   desc        = "k8s worker node 01"
 
-  clone   = "ubuntu-cloud-2"
+  clone   = "noble-server-cloudimg-amd64"
   os_type = "cloud-init"
   onboot  = true
 
@@ -244,7 +218,7 @@ resource "proxmox_vm_qemu" "worker-02" {
   name        = "worker-02.xuhuisun.local"
   desc        = "k8s worker node 02"
 
-  clone   = "ubuntu-cloud-2"
+  clone   = "noble-server-cloudimg-amd64"
   os_type = "cloud-init"
   onboot  = true
 
@@ -317,7 +291,7 @@ resource "proxmox_vm_qemu" "worker-03" {
   name        = "worker-03.xuhuisun.local"
   desc        = "k8s worker node 03"
 
-  clone   = "ubuntu-cloud-2"
+  clone   = "noble-server-cloudimg-amd64"
   os_type = "cloud-init"
   onboot  = true
 
@@ -390,7 +364,7 @@ resource "proxmox_vm_qemu" "worker-04" {
   name        = "worker-04.xuhuisun.local"
   desc        = "k8s worker node 04"
 
-  clone   = "ubuntu-cloud-2"
+  clone   = "noble-server-cloudimg-amd64"
   os_type = "cloud-init"
   onboot  = true
 
@@ -463,7 +437,7 @@ resource "proxmox_vm_qemu" "worker-05" {
   name        = "worker-05.xuhuisun.local"
   desc        = "k8s worker node 05"
 
-  clone   = "ubuntu-cloud-2"
+  clone   = "noble-server-cloudimg-amd64"
   os_type = "cloud-init"
   onboot  = true
 
@@ -536,7 +510,7 @@ resource "proxmox_vm_qemu" "scrypted" {
   name        = "scrypted.xuhuisun.local"
   desc        = "Scrypted"
 
-  clone   = "ubuntu-cloud-2"
+  clone   = "noble-server-cloudimg-amd64"
   os_type = "cloud-init"
   onboot  = true
 
