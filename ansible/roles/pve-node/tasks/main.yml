@@ -7,8 +7,3 @@
   import_tasks: create-terraform-user.yml
   tags:
     - create-terraform-user
-
-- name: create cloudimg template
-  import_tasks: create-cloudimg-template.yml
-  tags:
-    - create-cloudimg-template

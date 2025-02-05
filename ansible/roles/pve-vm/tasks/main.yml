@@ -3,9 +3,3 @@
   when: ansible_facts['os_family']|lower == 'debian'
   tags:
     - qemu-guest-agent.yml
-
-- name: Install iscsi for Debian
-  import_tasks: iscsi.yml
-  when: ansible_facts['os_family']|lower == 'debian'
-  tags:
-    - iscsi

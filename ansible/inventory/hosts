@@ -5,6 +5,10 @@ pbs.xuhuisun.local ansible_host=192.168.60.2
 pve2.xuhuisun.local ansible_host=192.168.60.3
 
 [vm]
+master-01.k8s.xuhuisun.local ansible_host=192.168.60.150
+master-02.k8s.xuhuisun.local ansible_host=192.168.60.151
+master-03.k8s.xuhuisun.local ansible_host=192.168.60.152
+
 master-01.xuhuisun.local ansible_host=192.168.60.201
 master-02.xuhuisun.local ansible_host=192.168.60.202
 master-03.xuhuisun.local ansible_host=192.168.60.203
