@@ -8,6 +8,12 @@ pve2.xuhuisun.local ansible_host=192.168.60.3
 master-01.k8s.xuhuisun.local ansible_host=192.168.60.150
 master-02.k8s.xuhuisun.local ansible_host=192.168.60.151
 master-03.k8s.xuhuisun.local ansible_host=192.168.60.152
+worker-01.k8s.xuhuisun.local ansible_host=192.168.60.160
+worker-02.k8s.xuhuisun.local ansible_host=192.168.60.161
+worker-03.k8s.xuhuisun.local ansible_host=192.168.60.162
+worker-04.k8s.xuhuisun.local ansible_host=192.168.60.163
+worker-05.k8s.xuhuisun.local ansible_host=192.168.60.164
+worker-06.k8s.xuhuisun.local ansible_host=192.168.60.165
 
 master-01.xuhuisun.local ansible_host=192.168.60.201
 master-02.xuhuisun.local ansible_host=192.168.60.202
