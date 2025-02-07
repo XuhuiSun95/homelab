@@ -95,6 +95,10 @@ resource "proxmox_virtual_environment_vm" "master-01_k8s" {
         address = "192.168.60.150/24"
         gateway = "192.168.60.1"
       }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:fe8b:ad14/64"
+        gateway = "2600:8801:2aa0:b305::1"
+      }
     }
 
     user_account {
@@ -166,6 +170,10 @@ resource "proxmox_virtual_environment_vm" "master-02_k8s" {
       ipv4 {
         address = "192.168.60.151/24"
         gateway = "192.168.60.1"
+      }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:fe1a:7805/64"
+        gateway = "2600:8801:2aa0:b305::1"
       }
     }
 
@@ -239,6 +247,10 @@ resource "proxmox_virtual_environment_vm" "master-03_k8s" {
         address = "192.168.60.152/24"
         gateway = "192.168.60.1"
       }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:fe28:cbeb/64"
+        gateway = "2600:8801:2aa0:b305::1"
+      }
     }
 
     user_account {
@@ -310,6 +322,10 @@ resource "proxmox_virtual_environment_vm" "worker-01_k8s" {
       ipv4 {
         address = "192.168.60.160/24"
         gateway = "192.168.60.1"
+      }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:fe53:58b9/64"
+        gateway = "2600:8801:2aa0:b305::1"
       }
     }
 
@@ -383,6 +399,10 @@ resource "proxmox_virtual_environment_vm" "worker-02_k8s" {
         address = "192.168.60.161/24"
         gateway = "192.168.60.1"
       }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:feed:8783/64"
+        gateway = "2600:8801:2aa0:b305::1"
+      }
     }
 
     user_account {
@@ -454,6 +474,10 @@ resource "proxmox_virtual_environment_vm" "worker-03_k8s" {
       ipv4 {
         address = "192.168.60.162/24"
         gateway = "192.168.60.1"
+      }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:fee0:31c2/64"
+        gateway = "2600:8801:2aa0:b305::1"
       }
     }
 
@@ -527,6 +551,10 @@ resource "proxmox_virtual_environment_vm" "worker-04_k8s" {
         address = "192.168.60.163/24"
         gateway = "192.168.60.1"
       }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:fed9:fbd5/64"
+        gateway = "2600:8801:2aa0:b305::1"
+      }
     }
 
     user_account {
@@ -599,6 +627,10 @@ resource "proxmox_virtual_environment_vm" "worker-05_k8s" {
         address = "192.168.60.164/24"
         gateway = "192.168.60.1"
       }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:fe5a:dd59/64"
+        gateway = "2600:8801:2aa0:b305::1"
+      }
     }
 
     user_account {
@@ -670,6 +702,10 @@ resource "proxmox_virtual_environment_vm" "worker-06_k8s" {
       ipv4 {
         address = "192.168.60.165/24"
         gateway = "192.168.60.1"
+      }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:fe80:d75a/64"
+        gateway = "2600:8801:2aa0:b305::1"
       }
     }
 
