@@ -110,6 +110,7 @@ resource "proxmox_virtual_environment_vm" "master-01_k8s" {
   network_device {
     bridge  = "vmbr0"
     vlan_id = 60
+    trunks  = "60;1610"
     mtu     = 1
   }
 
@@ -186,6 +187,7 @@ resource "proxmox_virtual_environment_vm" "master-02_k8s" {
   network_device {
     bridge  = "vmbr0"
     vlan_id = 60
+    trunks  = "60;1610"
     mtu     = 1
   }
 
@@ -262,6 +264,7 @@ resource "proxmox_virtual_environment_vm" "master-03_k8s" {
   network_device {
     bridge  = "vmbr0"
     vlan_id = 60
+    trunks  = "60;1610"
     mtu     = 1
   }
 
@@ -315,6 +318,16 @@ resource "proxmox_virtual_environment_vm" "worker-01_k8s" {
     ssd          = true
   }
 
+  disk {
+    datastore_id = "local-zfs"
+    file_format  = "raw"
+    interface    = "scsi1"
+    iothread     = true
+    discard      = "on"
+    size         = 200
+    ssd          = true
+  }
+
   initialization {
     datastore_id = "local-zfs"
 
@@ -338,6 +351,7 @@ resource "proxmox_virtual_environment_vm" "worker-01_k8s" {
   network_device {
     bridge  = "vmbr0"
     vlan_id = 60
+    trunks  = "60;1610"
     mtu     = 1
   }
 
@@ -391,6 +405,16 @@ resource "proxmox_virtual_environment_vm" "worker-02_k8s" {
     ssd          = true
   }
 
+  disk {
+    datastore_id = "local-zfs"
+    file_format  = "raw"
+    interface    = "scsi1"
+    iothread     = true
+    discard      = "on"
+    size         = 200
+    ssd          = true
+  }
+
   initialization {
     datastore_id = "local-zfs"
 
@@ -414,6 +438,7 @@ resource "proxmox_virtual_environment_vm" "worker-02_k8s" {
   network_device {
     bridge  = "vmbr0"
     vlan_id = 60
+    trunks  = "60;1610"
     mtu     = 1
   }
 
@@ -467,6 +492,16 @@ resource "proxmox_virtual_environment_vm" "worker-03_k8s" {
     ssd          = true
   }
 
+  disk {
+    datastore_id = "local-zfs"
+    file_format  = "raw"
+    interface    = "scsi1"
+    iothread     = true
+    discard      = "on"
+    size         = 200
+    ssd          = true
+  }
+
   initialization {
     datastore_id = "local-zfs"
 
@@ -490,6 +525,7 @@ resource "proxmox_virtual_environment_vm" "worker-03_k8s" {
   network_device {
     bridge  = "vmbr0"
     vlan_id = 60
+    trunks  = "60;1610"
     mtu     = 1
   }
 
@@ -543,6 +579,16 @@ resource "proxmox_virtual_environment_vm" "worker-04_k8s" {
     ssd          = true
   }
 
+  disk {
+    datastore_id = "local-zfs"
+    file_format  = "raw"
+    interface    = "scsi1"
+    iothread     = true
+    discard      = "on"
+    size         = 200
+    ssd          = true
+  }
+
   initialization {
     datastore_id = "local-zfs"
 
@@ -566,6 +612,7 @@ resource "proxmox_virtual_environment_vm" "worker-04_k8s" {
   network_device {
     bridge  = "vmbr0"
     vlan_id = 60
+    trunks  = "60;1610"
     mtu     = 1
   }
 
@@ -619,6 +666,16 @@ resource "proxmox_virtual_environment_vm" "worker-05_k8s" {
     ssd          = true
   }
 
+  disk {
+    datastore_id = "local-zfs"
+    file_format  = "raw"
+    interface    = "scsi1"
+    iothread     = true
+    discard      = "on"
+    size         = 200
+    ssd          = true
+  }
+
   initialization {
     datastore_id = "local-zfs"
 
@@ -642,6 +699,7 @@ resource "proxmox_virtual_environment_vm" "worker-05_k8s" {
   network_device {
     bridge  = "vmbr0"
     vlan_id = 60
+    trunks  = "60;1610"
     mtu     = 1
   }
 
@@ -695,6 +753,16 @@ resource "proxmox_virtual_environment_vm" "worker-06_k8s" {
     ssd          = true
   }
 
+  disk {
+    datastore_id = "local-zfs"
+    file_format  = "raw"
+    interface    = "scsi1"
+    iothread     = true
+    discard      = "on"
+    size         = 200
+    ssd          = true
+  }
+
   initialization {
     datastore_id = "local-zfs"
 
@@ -718,6 +786,7 @@ resource "proxmox_virtual_environment_vm" "worker-06_k8s" {
   network_device {
     bridge  = "vmbr0"
     vlan_id = 60
+    trunks  = "60;1610"
     mtu     = 1
   }
 
