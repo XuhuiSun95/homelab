@@ -9,7 +9,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.70.1"
+      version = "0.71.0"
     }
   }
 }
@@ -108,10 +108,11 @@ resource "proxmox_virtual_environment_vm" "master-01_k8s" {
   }
 
   network_device {
-    bridge  = "vmbr0"
-    vlan_id = 60
-    trunks  = "60;1610"
-    mtu     = 1
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:8B:AD:14"
+    trunks      = "60;1610"
+    mtu         = 1
   }
 
   operating_system {
@@ -185,10 +186,11 @@ resource "proxmox_virtual_environment_vm" "master-02_k8s" {
   }
 
   network_device {
-    bridge  = "vmbr0"
-    vlan_id = 60
-    trunks  = "60;1610"
-    mtu     = 1
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:1A:78:05"
+    trunks      = "60;1610"
+    mtu         = 1
   }
 
   operating_system {
@@ -262,10 +264,11 @@ resource "proxmox_virtual_environment_vm" "master-03_k8s" {
   }
 
   network_device {
-    bridge  = "vmbr0"
-    vlan_id = 60
-    trunks  = "60;1610"
-    mtu     = 1
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:28:CB:EB"
+    trunks      = "60;1610"
+    mtu         = 1
   }
 
   operating_system {
@@ -349,10 +352,11 @@ resource "proxmox_virtual_environment_vm" "worker-01_k8s" {
   }
 
   network_device {
-    bridge  = "vmbr0"
-    vlan_id = 60
-    trunks  = "60;1610"
-    mtu     = 1
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:53:58:B9"
+    trunks      = "60;1610"
+    mtu         = 1
   }
 
   operating_system {
@@ -436,10 +440,11 @@ resource "proxmox_virtual_environment_vm" "worker-02_k8s" {
   }
 
   network_device {
-    bridge  = "vmbr0"
-    vlan_id = 60
-    trunks  = "60;1610"
-    mtu     = 1
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:ED:87:83"
+    trunks      = "60;1610"
+    mtu         = 1
   }
 
   operating_system {
@@ -523,10 +528,11 @@ resource "proxmox_virtual_environment_vm" "worker-03_k8s" {
   }
 
   network_device {
-    bridge  = "vmbr0"
-    vlan_id = 60
-    trunks  = "60;1610"
-    mtu     = 1
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:E0:31:C2"
+    trunks      = "60;1610"
+    mtu         = 1
   }
 
   operating_system {
@@ -610,10 +616,11 @@ resource "proxmox_virtual_environment_vm" "worker-04_k8s" {
   }
 
   network_device {
-    bridge  = "vmbr0"
-    vlan_id = 60
-    trunks  = "60;1610"
-    mtu     = 1
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:D9:FB:D5"
+    trunks      = "60;1610"
+    mtu         = 1
   }
 
   operating_system {
@@ -697,10 +704,11 @@ resource "proxmox_virtual_environment_vm" "worker-05_k8s" {
   }
 
   network_device {
-    bridge  = "vmbr0"
-    vlan_id = 60
-    trunks  = "60;1610"
-    mtu     = 1
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:5A:DD:59"
+    trunks      = "60;1610"
+    mtu         = 1
   }
 
   operating_system {
@@ -784,10 +792,11 @@ resource "proxmox_virtual_environment_vm" "worker-06_k8s" {
   }
 
   network_device {
-    bridge  = "vmbr0"
-    vlan_id = 60
-    trunks  = "60;1610"
-    mtu     = 1
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:80:D7:5A"
+    trunks      = "60;1610"
+    mtu         = 1
   }
 
   operating_system {
