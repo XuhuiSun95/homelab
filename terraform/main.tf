@@ -9,7 +9,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.71.0"
+      version = "0.73.0"
     }
   }
 }
@@ -49,9 +49,9 @@ data "local_file" "ssh_public_key" {
   filename = "./id_rsa.pub"
 }
 
-resource "proxmox_virtual_environment_vm" "master-01_k8s" {
-  name        = "master-01.k8s.xuhuisun.local"
-  description = "master node 01 - k8s cluster"
+resource "proxmox_virtual_environment_vm" "control-plane-01_k8s" {
+  name        = "control-plane-01.k8s.xuhuisun.local"
+  description = "control plane node 01 - k8s cluster"
   tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_control-plane"]
 
   node_name = "pve2"
@@ -83,7 +83,7 @@ resource "proxmox_virtual_environment_vm" "master-01_k8s" {
     interface    = "scsi0"
     iothread     = true
     discard      = "on"
-    size         = 40
+    size         = 30
     ssd          = true
   }
 
@@ -111,7 +111,6 @@ resource "proxmox_virtual_environment_vm" "master-01_k8s" {
     bridge      = "vmbr0"
     vlan_id     = 60
     mac_address = "BC:24:11:8B:AD:14"
-    trunks      = "60;1610"
     mtu         = 1
   }
 
@@ -127,9 +126,9 @@ resource "proxmox_virtual_environment_vm" "master-01_k8s" {
   }
 }
 
-resource "proxmox_virtual_environment_vm" "master-02_k8s" {
-  name        = "master-02.k8s.xuhuisun.local"
-  description = "master node 02 - k8s cluster"
+resource "proxmox_virtual_environment_vm" "control-plane-02_k8s" {
+  name        = "control-plane-02.k8s.xuhuisun.local"
+  description = "control plane node 02 - k8s cluster"
   tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_control-plane"]
 
   node_name = "pve2"
@@ -161,7 +160,7 @@ resource "proxmox_virtual_environment_vm" "master-02_k8s" {
     interface    = "scsi0"
     iothread     = true
     discard      = "on"
-    size         = 40
+    size         = 30
     ssd          = true
   }
 
@@ -189,7 +188,6 @@ resource "proxmox_virtual_environment_vm" "master-02_k8s" {
     bridge      = "vmbr0"
     vlan_id     = 60
     mac_address = "BC:24:11:1A:78:05"
-    trunks      = "60;1610"
     mtu         = 1
   }
 
@@ -205,9 +203,9 @@ resource "proxmox_virtual_environment_vm" "master-02_k8s" {
   }
 }
 
-resource "proxmox_virtual_environment_vm" "master-03_k8s" {
-  name        = "master-03.k8s.xuhuisun.local"
-  description = "master node 03 - k8s cluster"
+resource "proxmox_virtual_environment_vm" "control-plane-03_k8s" {
+  name        = "control-plane-03.k8s.xuhuisun.local"
+  description = "control plane node 03 - k8s cluster"
   tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_control-plane"]
 
   node_name = "pve2"
@@ -239,7 +237,7 @@ resource "proxmox_virtual_environment_vm" "master-03_k8s" {
     interface    = "scsi0"
     iothread     = true
     discard      = "on"
-    size         = 40
+    size         = 30
     ssd          = true
   }
 
@@ -267,7 +265,6 @@ resource "proxmox_virtual_environment_vm" "master-03_k8s" {
     bridge      = "vmbr0"
     vlan_id     = 60
     mac_address = "BC:24:11:28:CB:EB"
-    trunks      = "60;1610"
     mtu         = 1
   }
 
@@ -283,10 +280,241 @@ resource "proxmox_virtual_environment_vm" "master-03_k8s" {
   }
 }
 
-resource "proxmox_virtual_environment_vm" "worker-01_k8s" {
-  name        = "worker-01.k8s.xuhuisun.local"
-  description = "worker node 01 - k8s cluster"
-  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_worker"]
+resource "proxmox_virtual_environment_vm" "system-01_k8s" {
+  name        = "system-01.k8s.xuhuisun.local"
+  description = "system node 01 - k8s cluster"
+  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_system"]
+
+  node_name = "pve2"
+  vm_id     = 155
+
+  agent {
+    enabled = true
+  }
+
+  startup {
+    order = "2"
+  }
+
+  cpu {
+    cores   = 2
+    numa    = true
+    sockets = 2
+    type    = "host"
+  }
+
+  memory {
+    dedicated = 8192
+    floating  = 8192
+  }
+
+  disk {
+    datastore_id = "local-zfs"
+    file_id      = proxmox_virtual_environment_download_file.ubuntu_24_noble_qcow2_image.id
+    interface    = "scsi0"
+    iothread     = true
+    discard      = "on"
+    size         = 40
+    ssd          = true
+  }
+
+  initialization {
+    datastore_id = "local-zfs"
+
+    ip_config {
+      ipv4 {
+        address = "192.168.60.155/24"
+        gateway = "192.168.60.1"
+      }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:fe0c:dcf2/64"
+        gateway = "2600:8801:2aa0:b305::1"
+      }
+    }
+
+    user_account {
+      username = "esun-local"
+      keys     = [trimspace(data.local_file.ssh_public_key.content)]
+    }
+  }
+
+  network_device {
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:0C:DC:F2"
+    mtu         = 1
+  }
+
+  operating_system {
+    type = "l26"
+  }
+
+  scsi_hardware = "virtio-scsi-single"
+
+  tpm_state {
+    datastore_id = "local-zfs"
+    version      = "v2.0"
+  }
+}
+
+resource "proxmox_virtual_environment_vm" "system-02_k8s" {
+  name        = "system-02.k8s.xuhuisun.local"
+  description = "system node 02 - k8s cluster"
+  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_system"]
+
+  node_name = "pve2"
+  vm_id     = 156
+
+  agent {
+    enabled = true
+  }
+
+  startup {
+    order = "2"
+  }
+
+  cpu {
+    cores   = 2
+    numa    = true
+    sockets = 2
+    type    = "host"
+  }
+
+  memory {
+    dedicated = 8192
+    floating  = 8192
+  }
+
+  disk {
+    datastore_id = "local-zfs"
+    file_id      = proxmox_virtual_environment_download_file.ubuntu_24_noble_qcow2_image.id
+    interface    = "scsi0"
+    iothread     = true
+    discard      = "on"
+    size         = 40
+    ssd          = true
+  }
+
+  initialization {
+    datastore_id = "local-zfs"
+
+    ip_config {
+      ipv4 {
+        address = "192.168.60.156/24"
+        gateway = "192.168.60.1"
+      }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:fe2e:f049/64"
+        gateway = "2600:8801:2aa0:b305::1"
+      }
+    }
+
+    user_account {
+      username = "esun-local"
+      keys     = [trimspace(data.local_file.ssh_public_key.content)]
+    }
+  }
+
+  network_device {
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:2E:F0:49"
+    mtu         = 1
+  }
+
+  operating_system {
+    type = "l26"
+  }
+
+  scsi_hardware = "virtio-scsi-single"
+
+  tpm_state {
+    datastore_id = "local-zfs"
+    version      = "v2.0"
+  }
+}
+
+resource "proxmox_virtual_environment_vm" "system-03_k8s" {
+  name        = "system-03.k8s.xuhuisun.local"
+  description = "system node 03 - k8s cluster"
+  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_system"]
+
+  node_name = "pve2"
+  vm_id     = 157
+
+  agent {
+    enabled = true
+  }
+
+  startup {
+    order = "2"
+  }
+
+  cpu {
+    cores   = 2
+    numa    = true
+    sockets = 2
+    type    = "host"
+  }
+
+  memory {
+    dedicated = 8192
+    floating  = 8192
+  }
+
+  disk {
+    datastore_id = "local-zfs"
+    file_id      = proxmox_virtual_environment_download_file.ubuntu_24_noble_qcow2_image.id
+    interface    = "scsi0"
+    iothread     = true
+    discard      = "on"
+    size         = 40
+    ssd          = true
+  }
+
+  initialization {
+    datastore_id = "local-zfs"
+
+    ip_config {
+      ipv4 {
+        address = "192.168.60.157/24"
+        gateway = "192.168.60.1"
+      }
+      ipv6 {
+        address = "2600:8801:2aa0:b305:be24:11ff:fe52:ebe8/64"
+        gateway = "2600:8801:2aa0:b305::1"
+      }
+    }
+
+    user_account {
+      username = "esun-local"
+      keys     = [trimspace(data.local_file.ssh_public_key.content)]
+    }
+  }
+
+  network_device {
+    bridge      = "vmbr0"
+    vlan_id     = 60
+    mac_address = "BC:24:11:52:EB:E8"
+    mtu         = 1
+  }
+
+  operating_system {
+    type = "l26"
+  }
+
+  scsi_hardware = "virtio-scsi-single"
+
+  tpm_state {
+    datastore_id = "local-zfs"
+    version      = "v2.0"
+  }
+}
+
+resource "proxmox_virtual_environment_vm" "user-01_k8s" {
+  name        = "user-01.k8s.xuhuisun.local"
+  description = "user node 01 - k8s cluster"
+  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_user"]
 
   node_name = "pve2"
   vm_id     = 160
@@ -296,7 +524,7 @@ resource "proxmox_virtual_environment_vm" "worker-01_k8s" {
   }
 
   startup {
-    order = "2"
+    order = "3"
   }
 
   cpu {
@@ -317,7 +545,7 @@ resource "proxmox_virtual_environment_vm" "worker-01_k8s" {
     interface    = "scsi0"
     iothread     = true
     discard      = "on"
-    size         = 50
+    size         = 40
     ssd          = true
   }
 
@@ -355,7 +583,6 @@ resource "proxmox_virtual_environment_vm" "worker-01_k8s" {
     bridge      = "vmbr0"
     vlan_id     = 60
     mac_address = "BC:24:11:53:58:B9"
-    trunks      = "60;1610"
     mtu         = 1
   }
 
@@ -371,10 +598,10 @@ resource "proxmox_virtual_environment_vm" "worker-01_k8s" {
   }
 }
 
-resource "proxmox_virtual_environment_vm" "worker-02_k8s" {
-  name        = "worker-02.k8s.xuhuisun.local"
-  description = "worker node 02 - k8s cluster"
-  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_worker"]
+resource "proxmox_virtual_environment_vm" "user-02_k8s" {
+  name        = "user-02.k8s.xuhuisun.local"
+  description = "user node 02 - k8s cluster"
+  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_user"]
 
   node_name = "pve2"
   vm_id     = 161
@@ -384,7 +611,7 @@ resource "proxmox_virtual_environment_vm" "worker-02_k8s" {
   }
 
   startup {
-    order = "2"
+    order = "3"
   }
 
   cpu {
@@ -405,7 +632,7 @@ resource "proxmox_virtual_environment_vm" "worker-02_k8s" {
     interface    = "scsi0"
     iothread     = true
     discard      = "on"
-    size         = 50
+    size         = 40
     ssd          = true
   }
 
@@ -443,7 +670,6 @@ resource "proxmox_virtual_environment_vm" "worker-02_k8s" {
     bridge      = "vmbr0"
     vlan_id     = 60
     mac_address = "BC:24:11:ED:87:83"
-    trunks      = "60;1610"
     mtu         = 1
   }
 
@@ -459,10 +685,10 @@ resource "proxmox_virtual_environment_vm" "worker-02_k8s" {
   }
 }
 
-resource "proxmox_virtual_environment_vm" "worker-03_k8s" {
-  name        = "worker-03.k8s.xuhuisun.local"
-  description = "worker node 03 - k8s cluster"
-  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_worker"]
+resource "proxmox_virtual_environment_vm" "user-03_k8s" {
+  name        = "user-03.k8s.xuhuisun.local"
+  description = "user node 03 - k8s cluster"
+  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_user"]
 
   node_name = "pve2"
   vm_id     = 162
@@ -472,7 +698,7 @@ resource "proxmox_virtual_environment_vm" "worker-03_k8s" {
   }
 
   startup {
-    order = "2"
+    order = "3"
   }
 
   cpu {
@@ -493,7 +719,7 @@ resource "proxmox_virtual_environment_vm" "worker-03_k8s" {
     interface    = "scsi0"
     iothread     = true
     discard      = "on"
-    size         = 50
+    size         = 40
     ssd          = true
   }
 
@@ -531,7 +757,6 @@ resource "proxmox_virtual_environment_vm" "worker-03_k8s" {
     bridge      = "vmbr0"
     vlan_id     = 60
     mac_address = "BC:24:11:E0:31:C2"
-    trunks      = "60;1610"
     mtu         = 1
   }
 
@@ -547,10 +772,10 @@ resource "proxmox_virtual_environment_vm" "worker-03_k8s" {
   }
 }
 
-resource "proxmox_virtual_environment_vm" "worker-04_k8s" {
-  name        = "worker-04.k8s.xuhuisun.local"
-  description = "worker node 04 - k8s cluster"
-  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_worker"]
+resource "proxmox_virtual_environment_vm" "user-04_k8s" {
+  name        = "user-04.k8s.xuhuisun.local"
+  description = "user node 04 - k8s cluster"
+  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_user"]
 
   node_name = "pve2"
   vm_id     = 163
@@ -560,7 +785,7 @@ resource "proxmox_virtual_environment_vm" "worker-04_k8s" {
   }
 
   startup {
-    order = "2"
+    order = "3"
   }
 
   cpu {
@@ -581,7 +806,7 @@ resource "proxmox_virtual_environment_vm" "worker-04_k8s" {
     interface    = "scsi0"
     iothread     = true
     discard      = "on"
-    size         = 50
+    size         = 40
     ssd          = true
   }
 
@@ -619,7 +844,6 @@ resource "proxmox_virtual_environment_vm" "worker-04_k8s" {
     bridge      = "vmbr0"
     vlan_id     = 60
     mac_address = "BC:24:11:D9:FB:D5"
-    trunks      = "60;1610"
     mtu         = 1
   }
 
@@ -635,10 +859,10 @@ resource "proxmox_virtual_environment_vm" "worker-04_k8s" {
   }
 }
 
-resource "proxmox_virtual_environment_vm" "worker-05_k8s" {
-  name        = "worker-05.k8s.xuhuisun.local"
-  description = "worker node 05 - k8s cluster"
-  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_worker"]
+resource "proxmox_virtual_environment_vm" "user-05_k8s" {
+  name        = "user-05.k8s.xuhuisun.local"
+  description = "user node 05 - k8s cluster"
+  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_user"]
 
   node_name = "pve2"
   vm_id     = 164
@@ -648,7 +872,7 @@ resource "proxmox_virtual_environment_vm" "worker-05_k8s" {
   }
 
   startup {
-    order = "2"
+    order = "3"
   }
 
   cpu {
@@ -669,7 +893,7 @@ resource "proxmox_virtual_environment_vm" "worker-05_k8s" {
     interface    = "scsi0"
     iothread     = true
     discard      = "on"
-    size         = 50
+    size         = 40
     ssd          = true
   }
 
@@ -707,7 +931,6 @@ resource "proxmox_virtual_environment_vm" "worker-05_k8s" {
     bridge      = "vmbr0"
     vlan_id     = 60
     mac_address = "BC:24:11:5A:DD:59"
-    trunks      = "60;1610"
     mtu         = 1
   }
 
@@ -723,10 +946,10 @@ resource "proxmox_virtual_environment_vm" "worker-05_k8s" {
   }
 }
 
-resource "proxmox_virtual_environment_vm" "worker-06_k8s" {
-  name        = "worker-06.k8s.xuhuisun.local"
-  description = "worker node 06 - k8s cluster"
-  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_worker"]
+resource "proxmox_virtual_environment_vm" "user-06_k8s" {
+  name        = "user-06.k8s.xuhuisun.local"
+  description = "user node 06 - k8s cluster"
+  tags        = ["managed-by_terraform", "os_linux", "os-sku_ubuntu", "os-image-version_ubuntu-24-noble-qcow2", "type_k8s", "type-k8s-role_user"]
 
   node_name = "pve2"
   vm_id     = 165
@@ -736,7 +959,7 @@ resource "proxmox_virtual_environment_vm" "worker-06_k8s" {
   }
 
   startup {
-    order = "2"
+    order = "3"
   }
 
   cpu {
@@ -757,7 +980,7 @@ resource "proxmox_virtual_environment_vm" "worker-06_k8s" {
     interface    = "scsi0"
     iothread     = true
     discard      = "on"
-    size         = 50
+    size         = 40
     ssd          = true
   }
 
@@ -795,7 +1018,6 @@ resource "proxmox_virtual_environment_vm" "worker-06_k8s" {
     bridge      = "vmbr0"
     vlan_id     = 60
     mac_address = "BC:24:11:80:D7:5A"
-    trunks      = "60;1610"
     mtu         = 1
   }
 
@@ -889,4 +1111,6 @@ resource "proxmox_virtual_environment_download_file" "ubuntu_24_noble_qcow2_imag
   node_name    = "pve2"
 
   url = "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img"
+
+  overwrite = false
 }

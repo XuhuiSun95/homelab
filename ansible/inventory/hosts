@@ -5,15 +5,18 @@ pbs.xuhuisun.local ansible_host=192.168.60.2
 pve2.xuhuisun.local ansible_host=192.168.60.3
 
 [vm]
-master-01.k8s.xuhuisun.local ansible_host=192.168.60.150
-master-02.k8s.xuhuisun.local ansible_host=192.168.60.151
-master-03.k8s.xuhuisun.local ansible_host=192.168.60.152
-worker-01.k8s.xuhuisun.local ansible_host=192.168.60.160
-worker-02.k8s.xuhuisun.local ansible_host=192.168.60.161
-worker-03.k8s.xuhuisun.local ansible_host=192.168.60.162
-worker-04.k8s.xuhuisun.local ansible_host=192.168.60.163
-worker-05.k8s.xuhuisun.local ansible_host=192.168.60.164
-worker-06.k8s.xuhuisun.local ansible_host=192.168.60.165
+control-plane-01.k8s.xuhuisun.local ansible_host=192.168.60.150
+control-plane-02.k8s.xuhuisun.local ansible_host=192.168.60.151
+control-plane-03.k8s.xuhuisun.local ansible_host=192.168.60.152
+system-01.k8s.xuhuisun.local ansible_host=192.168.60.155
+system-02.k8s.xuhuisun.local ansible_host=192.168.60.156
+system-03.k8s.xuhuisun.local ansible_host=192.168.60.157
+user-01.k8s.xuhuisun.local ansible_host=192.168.60.160
+user-02.k8s.xuhuisun.local ansible_host=192.168.60.161
+user-03.k8s.xuhuisun.local ansible_host=192.168.60.162
+user-04.k8s.xuhuisun.local ansible_host=192.168.60.163
+user-05.k8s.xuhuisun.local ansible_host=192.168.60.164
+user-06.k8s.xuhuisun.local ansible_host=192.168.60.165
 
 master-01.xuhuisun.local ansible_host=192.168.60.201
 master-02.xuhuisun.local ansible_host=192.168.60.202
