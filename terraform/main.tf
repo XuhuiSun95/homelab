@@ -297,15 +297,15 @@ resource "proxmox_virtual_environment_vm" "system-01_k8s" {
   }
 
   cpu {
-    cores   = 2
+    cores   = 4
     numa    = true
     sockets = 2
     type    = "host"
   }
 
   memory {
-    dedicated = 8192
-    floating  = 8192
+    dedicated = 16384
+    floating  = 16384
   }
 
   disk {
@@ -374,15 +374,15 @@ resource "proxmox_virtual_environment_vm" "system-02_k8s" {
   }
 
   cpu {
-    cores   = 2
+    cores   = 4
     numa    = true
     sockets = 2
     type    = "host"
   }
 
   memory {
-    dedicated = 8192
-    floating  = 8192
+    dedicated = 16384
+    floating  = 16384
   }
 
   disk {
@@ -451,15 +451,15 @@ resource "proxmox_virtual_environment_vm" "system-03_k8s" {
   }
 
   cpu {
-    cores   = 2
+    cores   = 4
     numa    = true
     sockets = 2
     type    = "host"
   }
 
   memory {
-    dedicated = 8192
-    floating  = 8192
+    dedicated = 16384
+    floating  = 16384
   }
 
   disk {
