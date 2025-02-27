@@ -582,6 +582,7 @@ resource "proxmox_virtual_environment_vm" "user-01_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:53:58:B9"
     mtu         = 1
   }
@@ -669,6 +670,7 @@ resource "proxmox_virtual_environment_vm" "user-02_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:ED:87:83"
     mtu         = 1
   }
@@ -756,6 +758,7 @@ resource "proxmox_virtual_environment_vm" "user-03_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:E0:31:C2"
     mtu         = 1
   }
@@ -843,6 +846,7 @@ resource "proxmox_virtual_environment_vm" "user-04_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:D9:FB:D5"
     mtu         = 1
   }
@@ -930,6 +934,7 @@ resource "proxmox_virtual_environment_vm" "user-05_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:5A:DD:59"
     mtu         = 1
   }
@@ -1017,6 +1022,7 @@ resource "proxmox_virtual_environment_vm" "user-06_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:80:D7:5A"
     mtu         = 1
   }
