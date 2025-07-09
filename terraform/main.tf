@@ -110,6 +110,7 @@ resource "proxmox_virtual_environment_vm" "control-plane-01_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:8B:AD:14"
     mtu         = 1
   }
@@ -187,6 +188,7 @@ resource "proxmox_virtual_environment_vm" "control-plane-02_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:1A:78:05"
     mtu         = 1
   }
@@ -264,6 +266,7 @@ resource "proxmox_virtual_environment_vm" "control-plane-03_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:28:CB:EB"
     mtu         = 1
   }
@@ -341,6 +344,7 @@ resource "proxmox_virtual_environment_vm" "system-01_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:0C:DC:F2"
     mtu         = 1
   }
@@ -418,6 +422,7 @@ resource "proxmox_virtual_environment_vm" "system-02_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:2E:F0:49"
     mtu         = 1
   }
@@ -495,6 +500,7 @@ resource "proxmox_virtual_environment_vm" "system-03_k8s" {
   network_device {
     bridge      = "vmbr0"
     vlan_id     = 60
+    trunks      = "60;1610"
     mac_address = "BC:24:11:52:EB:E8"
     mtu         = 1
   }
@@ -557,6 +563,7 @@ resource "proxmox_virtual_environment_vm" "user-01_k8s" {
     discard      = "on"
     size         = 200
     ssd          = true
+    backup       = false
   }
 
   initialization {
@@ -645,6 +652,7 @@ resource "proxmox_virtual_environment_vm" "user-02_k8s" {
     discard      = "on"
     size         = 200
     ssd          = true
+    backup       = false
   }
 
   initialization {
@@ -733,6 +741,7 @@ resource "proxmox_virtual_environment_vm" "user-03_k8s" {
     discard      = "on"
     size         = 200
     ssd          = true
+    backup       = false
   }
 
   initialization {
@@ -821,6 +830,7 @@ resource "proxmox_virtual_environment_vm" "user-04_k8s" {
     discard      = "on"
     size         = 200
     ssd          = true
+    backup       = false
   }
 
   initialization {
@@ -909,6 +919,7 @@ resource "proxmox_virtual_environment_vm" "user-05_k8s" {
     discard      = "on"
     size         = 200
     ssd          = true
+    backup       = false
   }
 
   initialization {
@@ -997,6 +1008,7 @@ resource "proxmox_virtual_environment_vm" "user-06_k8s" {
     discard      = "on"
     size         = 200
     ssd          = true
+    backup       = false
   }
 
   initialization {
