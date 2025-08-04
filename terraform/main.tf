@@ -9,7 +9,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.73.0"
+      version = "0.79.0"
     }
   }
 }
@@ -534,15 +534,15 @@ resource "proxmox_virtual_environment_vm" "user-01_k8s" {
   }
 
   cpu {
-    cores   = 4
+    cores   = 8
     numa    = true
     sockets = 2
     type    = "host"
   }
 
   memory {
-    dedicated = 32768
-    floating  = 32768
+    dedicated = 65536
+    floating  = 65536
   }
 
   disk {
@@ -623,15 +623,15 @@ resource "proxmox_virtual_environment_vm" "user-02_k8s" {
   }
 
   cpu {
-    cores   = 4
+    cores   = 8
     numa    = true
     sockets = 2
     type    = "host"
   }
 
   memory {
-    dedicated = 32768
-    floating  = 32768
+    dedicated = 65536
+    floating  = 65536
   }
 
   disk {
@@ -712,15 +712,15 @@ resource "proxmox_virtual_environment_vm" "user-03_k8s" {
   }
 
   cpu {
-    cores   = 4
+    cores   = 8
     numa    = true
     sockets = 2
     type    = "host"
   }
 
   memory {
-    dedicated = 32768
-    floating  = 32768
+    dedicated = 65536
+    floating  = 65536
   }
 
   disk {
@@ -801,15 +801,15 @@ resource "proxmox_virtual_environment_vm" "user-04_k8s" {
   }
 
   cpu {
-    cores   = 4
+    cores   = 8
     numa    = true
     sockets = 2
     type    = "host"
   }
 
   memory {
-    dedicated = 32768
-    floating  = 32768
+    dedicated = 65536
+    floating  = 65536
   }
 
   disk {
@@ -890,15 +890,15 @@ resource "proxmox_virtual_environment_vm" "user-05_k8s" {
   }
 
   cpu {
-    cores   = 4
+    cores   = 8
     numa    = true
     sockets = 2
     type    = "host"
   }
 
   memory {
-    dedicated = 32768
-    floating  = 32768
+    dedicated = 65536
+    floating  = 65536
   }
 
   disk {
@@ -979,15 +979,15 @@ resource "proxmox_virtual_environment_vm" "user-06_k8s" {
   }
 
   cpu {
-    cores   = 4
+    cores   = 8
     numa    = true
     sockets = 2
     type    = "host"
   }
 
   memory {
-    dedicated = 32768
-    floating  = 32768
+    dedicated = 65536
+    floating  = 65536
   }
 
   disk {
